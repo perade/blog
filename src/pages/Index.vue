@@ -18,7 +18,7 @@ query {
       node {
         id
         title
-        date (format: "D. MMMM YYYY")
+        date (format: "DD MMMM YYYY")
         timeToRead
         description
         cover_image (width: 770, height: 380, blur: 10)
@@ -44,7 +44,7 @@ export default {
     PostCard
   },
   metaInfo: {
-    title: 'Hello, world!'
+    title: 'Home'
   }
 }
 </script>
