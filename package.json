@@ -1,5 +1,5 @@
 {
-  "name": "blog-with-gridsome",
+  "name": "blog",
   "private": true,
   "scripts": {
     "build": "gridsome build",
