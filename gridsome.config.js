@@ -5,9 +5,12 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'perade',
-  siteDescription: 'slowly, but steadily',
-  siteUrl: '',
+  siteName: 'Perade',
+  siteDescription: 'Slowly, but steadily',
+  siteUrl: 'https://perade.github.io',
+  pathPrefix: '/blog',
+  titleTemplate: `%s | perade`,
+  icon: 'src/favicon.png',
 
   templates: {
     Post: '/:title',
