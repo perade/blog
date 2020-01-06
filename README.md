@@ -1,4 +1,4 @@
-# blog-with-gridsome
+# blog
 
 Source of [my blog](https://github.com/gridsome/gridsome-starter-blog).
 
