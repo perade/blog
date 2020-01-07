@@ -10,9 +10,9 @@
     </div>
 
     <div class="post content-box">
-      <div class="post__header">
+      <!-- <div class="post__header">
         <g-image alt="Cover image" v-if="$page.post.cover_image" :src="$page.post.cover_image" />
-      </div>
+      </div> -->
 
       <div class="post__content" v-html="$page.post.content" />
 
@@ -59,7 +59,7 @@ query Post ($id: ID!) {
   post: post (id: $id) {
     title
     path
-    date (format: "D. MMMM YYYY")
+    date (format: "DD MMMM YYYY")
     timeToRead
     tags {
       id
@@ -68,7 +68,6 @@ query Post ($id: ID!) {
     }
     description
     content
-    cover_image (width: 860, blur: 10)
   }
 }
 </page-query>
@@ -103,10 +102,10 @@ query Post ($id: ID!) {
       margin-top: 0;
     }
 
-    p:first-of-type {
-      // font-size: 1.2em;
-      // color: var(--title-color);
-    }
+    // p:first-of-type {
+    //   font-size: 1.2em;
+    //   color: var(--title-color);
+    // }
 
     img {
       width: calc(100% + var(--space) * 2);
