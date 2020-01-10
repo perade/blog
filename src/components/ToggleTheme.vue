@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     openGitHub() {
-      window.open('https://github.com/perade')
+      window.open('https://github.com/perade/blog')
     },
     toggleTheme() {
       this.darkTheme = !this.darkTheme
