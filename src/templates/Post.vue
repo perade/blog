@@ -13,6 +13,9 @@
       <!-- <div class="post__header">
         <g-image alt="Cover image" v-if="$page.post.cover_image" :src="$page.post.cover_image" />
       </div> -->
+      <!-- <alert v-if="postIsOlderThanOneYear" class="bg-orange-100 border-l-4 border-orange-500 text-orange-900">
+        This post is over a year old, some of this information may be out of date.
+      </alert> -->
 
       <div class="post__content" v-html="$page.post.content" />
 
@@ -30,6 +33,9 @@
 </template>
 
 <script>
+import moment from 'moment'
+import config from '~/.temp/config.js'
+import slugify from '@sindresorhus/slugify'
 import PostMeta from '~/components/PostMeta'
 import PostTags from '~/components/PostTags'
 import Author from '~/components/Author.vue'
@@ -45,10 +51,46 @@ export default {
       title: this.$page.post.title,
       meta: [
         {
+          key: 'description',
           name: 'description',
-          content: this.$page.post.description
-        }
+          content: this.description(this.$page.post)
+        },
+        { property: "og:type", content: 'article' },
+        { property: "og:title", content: this.$page.post.title },
+        { property: "og:description", content: this.description(this.$page.post) },
+        { property: "og:url", content: this.postUrl },
+        { property: "article:published_time", content: moment(this.$page.post.date).format('YYYY-MM-DD') }
       ]
+    }
+  },
+  computed: {
+    config () {
+      return config
+    },
+    postIsOlderThanOneYear () {
+      let postDate = moment(this.$page.post.datetime)
+      return moment().diff(postDate, 'years') > 0 ? true : false
+    },
+    postUrl () {
+      let siteUrl = this.config.siteUrl
+      let postSlug = this.$page.post.slug
+      console.log('postSlug', postSlug)
+      console.log('$page.post', this.$page.post)
+
+      return postSlug ? `${siteUrl}/${postSlug}/` : `${siteUrl}/${slugify(this.$page.post.title)}/`
+    }
+  },
+  methods: {
+    description(post, length, clamp) {
+      if (post.description) {
+        return post.description
+      }
+
+      length = length || 280
+      clamp = clamp || ' ...'
+      let text = post.content.replace(/<pre(.|\n)*?<\/pre>/gm, '').replace(/<[^>]+>/gm, '')
+
+      return text.length > length ? `${ text.slice(0, length)}${clamp}` : text
     }
   }
 }
@@ -58,6 +100,7 @@ export default {
 query Post ($id: ID!) {
   post: post (id: $id) {
     title
+    slug
     path
     date (format: "DD MMMM YYYY")
     timeToRead

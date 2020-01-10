@@ -12,26 +12,42 @@
 </template>
 
 <page-query>
-query {
-  posts: allPost(filter: { published: { eq: true }}) {
+query Home ($page: Int) {
+  posts: allPost (page: $page, perPage: 5) @paginate {
+    totalCount
+    pageInfo {
+      totalPages
+      currentPage
+    }
     edges {
       node {
+      id
+      title
+      slug
+      date (format: "DD MMMM YYYY")
+      timeToRead
+      description
+      path
+      tags {
         id
         title
-        date (format: "DD MMMM YYYY")
-        timeToRead
-        description
         path
-        tags {
-          id
-          title
-          path
-        }
       }
+    }
     }
   }
 }
 </page-query>
+
+<static-query>
+query {
+  metadata {
+    siteName
+    siteUrl
+    siteDescription
+  }
+}
+</static-query>
 
 <script>
 import Author from '~/components/Author.vue'
@@ -42,8 +58,16 @@ export default {
     Author,
     PostCard
   },
-  metaInfo: {
-    title: 'Home'
+  metaInfo () {
+    return {
+      title: 'Home',
+      meta: [
+        { property: "og:type", content: 'website' },
+        { property: "og:title", content: this.$static.metadata.siteName },
+        { property: "og:description", content: this.$static.metadata.siteDescription },
+        { property: "og:url", content: this.$static.metadata.siteUrl }
+      ]
+    }
   }
 }
 </script>

@@ -19,6 +19,7 @@ query Tag ($id: ID!) {
         node {
           ...on Post {
             title
+            slug
             path
             date (format: "D. MMMM YYYY")
             timeToRead
