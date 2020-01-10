@@ -13,7 +13,7 @@ module.exports = {
   icon: 'src/favicon.png',
 
   templates: {
-    Post: '/:title',
+    Post: '/:slug',
     Tag: '/tag/:id'
   },
 
