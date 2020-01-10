@@ -74,8 +74,6 @@ export default {
     postUrl () {
       let siteUrl = this.config.siteUrl
       let postSlug = this.$page.post.slug
-      console.log('postSlug', postSlug)
-      console.log('$page.post', this.$page.post)
 
       return postSlug ? `${siteUrl}/${postSlug}/` : `${siteUrl}/${slugify(this.$page.post.title)}/`
     }
