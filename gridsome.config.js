@@ -10,7 +10,6 @@ module.exports = {
   siteUrl: 'https://perade.github.io',
   pathPrefix: '/blog',
   titleTemplate: `%s | perade`,
-  icon: 'src/favicon.png',
 
   templates: {
     Post: '/:slug',
