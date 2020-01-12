@@ -71,7 +71,7 @@ export default {
         { property: "og:type", content: 'website' },
         { property: "og:title", content: this.$static.metadata.siteName },
         { property: "og:description", content: this.$static.metadata.siteDescription },
-        { property: "og:url", content: this.$static.metadata.siteUrl },
+        { property: "og:url", content: this.config.siteUrl },
         { property: "og:image", content: this.ogImageUrl }
       ]
     }
@@ -81,7 +81,7 @@ export default {
       return config
     },
     ogImageUrl () {
-      return `${this.config.siteUrl}/images/Author.jpg`
+      return `${this.config.siteUrl}${this.config.pathPrefix}/images/Author.jpg`
     }
   }
 }

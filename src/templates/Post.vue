@@ -60,7 +60,7 @@ export default {
         { property: "og:description", content: this.description(this.$page.post) },
         { property: "og:url", content: this.postUrl },
         { property: "og:image", content: this.ogImageUrl },
-        { property: "article:published_time", content: moment(this.$page.post.date).format('YYYY-MM-DD') }
+        { property: "article:published_time", content: moment(this.$page.post.date, 'DD MMMM YYYY').format('YYYY-MM-DD') }
       ]
     }
   },
@@ -69,17 +69,18 @@ export default {
       return config
     },
     ogImageUrl () {
-      return `${this.config.siteUrl}/images/Author.jpg`
+      return `${this.config.siteUrl}${this.config.pathPrefix}/images/Author.jpg`
     },
     postIsOlderThanOneYear () {
-      let postDate = moment(this.$page.post.datetime)
+      const postDate = moment(this.$page.post.date, 'DD MMMM YYYY')
       return moment().diff(postDate, 'years') > 0 ? true : false
     },
     postUrl () {
-      let siteUrl = this.config.siteUrl
-      let postSlug = this.$page.post.slug
+      const siteUrl = this.config.siteUrl
+      const pathPrefix = this.config.pathPrefix
+      const postSlug = this.$page.post.slug
 
-      return postSlug ? `${siteUrl}/${postSlug}/` : `${siteUrl}/${slugify(this.$page.post.title)}/`
+      return postSlug ? `${siteUrl}${pathPrefix}/${postSlug}/` : `${siteUrl}${pathPrefix}/${slugify(this.$page.post.title)}/`
     }
   },
   methods: {
