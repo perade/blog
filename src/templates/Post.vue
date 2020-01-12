@@ -59,6 +59,7 @@ export default {
         { property: "og:title", content: this.$page.post.title },
         { property: "og:description", content: this.description(this.$page.post) },
         { property: "og:url", content: this.postUrl },
+        { property: "og:image", content: this.ogImageUrl },
         { property: "article:published_time", content: moment(this.$page.post.date).format('YYYY-MM-DD') }
       ]
     }
@@ -66,6 +67,9 @@ export default {
   computed: {
     config () {
       return config
+    },
+    ogImageUrl () {
+      return `${this.config.siteUrl}/images/Author.jpg`
     },
     postIsOlderThanOneYear () {
       let postDate = moment(this.$page.post.datetime)

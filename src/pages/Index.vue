@@ -50,6 +50,7 @@ query {
 </static-query>
 
 <script>
+import config from '~/.temp/config.js'
 import Author from '~/components/Author.vue'
 import PostCard from '~/components/PostCard.vue'
 
@@ -70,8 +71,17 @@ export default {
         { property: "og:type", content: 'website' },
         { property: "og:title", content: this.$static.metadata.siteName },
         { property: "og:description", content: this.$static.metadata.siteDescription },
-        { property: "og:url", content: this.$static.metadata.siteUrl }
+        { property: "og:url", content: this.$static.metadata.siteUrl },
+        { property: "og:image", content: this.ogImageUrl }
       ]
+    }
+  },
+  computed: {
+    config () {
+      return config
+    },
+    ogImageUrl () {
+      return `${this.config.siteUrl}/images/Author.jpg`
     }
   }
 }
