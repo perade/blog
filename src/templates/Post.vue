@@ -153,7 +153,7 @@ query Post ($id: ID!) {
       margin: 2em auto;
       display: block;
       // max-width: none;
-      max-width: 80%;
+      max-width: 100%;
     }
   }
 }
