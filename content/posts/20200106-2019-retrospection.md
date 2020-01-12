@@ -1,7 +1,7 @@
 ---
 title: "2019년 회고"
 slug: "2019 retrospection"
-date: 2020-01-06
+date: 2020-01-06 00:00:00
 published: true
 tags: ['Essay']
 canonical_url: false
