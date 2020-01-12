@@ -33,7 +33,7 @@ npm install --global @gridsome/cli
 yarn global add  @gridsome/cli
 ```
 
-이제 Gridsome을 사용할 준비가 끝났다.
+현재 시점(20.01.12) 기준 0.7.12 버전이 설치된다. 이제 Gridsome을 사용할 준비가 끝났다.
 
 ***
 
