@@ -62,6 +62,11 @@ export default {
     return {
       title: 'Home',
       meta: [
+        {
+          key: 'google-site-verification',
+          name: 'google-site-verification',
+          content: '1Yg-vdbPWKP6tcy7UZCVQqYSqVFQB1lwpQpK2v5CU0g'
+        },
         { property: "og:type", content: 'website' },
         { property: "og:title", content: this.$static.metadata.siteName },
         { property: "og:description", content: this.$static.metadata.siteDescription },
