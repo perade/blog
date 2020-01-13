@@ -69,7 +69,13 @@ export default {
       return config
     },
     ogImageUrl () {
-      return `${this.config.siteUrl}${this.config.pathPrefix}/images/Author.jpg`
+      const imagePath = `${this.config.siteUrl}${this.config.pathPrefix}/images`
+      const postSlug = this.$page.post.slug
+      const postYear = moment(this.$page.post.date, 'DD MMMM YYYY').format('YYYY')
+      const postMonth = moment(this.$page.post.date, 'DD MMMM YYYY').format('MM')
+      const postImage = `${postSlug}.jpg` || `${postSlug}.png` || ''
+      
+      return postImage ? `${imagePath}/${postYear}/${postMonth}/${postImage}` : `${imagePath}/Author.jpg`
     },
     postIsOlderThanOneYear () {
       const postDate = moment(this.$page.post.date, 'DD MMMM YYYY')
