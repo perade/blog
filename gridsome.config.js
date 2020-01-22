@@ -29,6 +29,13 @@ module.exports = {
             typeName: 'Tag',
             create: true
           }
+        },
+        remark: {
+          plugins: [
+            [ '@noxify/gridsome-plugin-remark-embed', {
+                'enabledProviders' : ['Gist'],
+            }]
+          ]
         }
       }
     },
