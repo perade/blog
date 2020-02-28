@@ -12,7 +12,7 @@ module.exports = {
   titleTemplate: `%s | perade`,
 
   templates: {
-    Post: '/:slug',
+    Post: '/:path',
     Tag: '/tag/:id'
   },
 

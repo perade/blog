@@ -23,7 +23,7 @@ query Home ($page: Int) {
       node {
       id
       title
-      slug
+      path
       date (format: "DD MMMM YYYY")
       timeToRead
       description

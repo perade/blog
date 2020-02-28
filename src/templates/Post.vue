@@ -70,10 +70,10 @@ export default {
     },
     ogImageUrl () {
       const imagePath = `${this.config.siteUrl}${this.config.pathPrefix}/images`
-      const postSlug = this.$page.post.slug
+      const postPath = this.$page.post.path
       const postYear = moment(this.$page.post.date, 'DD MMMM YYYY').format('YYYY')
       const postMonth = moment(this.$page.post.date, 'DD MMMM YYYY').format('MM')
-      const postImage = `${postSlug}.jpg` || `${postSlug}.png` || ''
+      const postImage = `${postPath}.jpg` || `${postPath}.png` || ''
       
       return postImage ? `${imagePath}/${postYear}/${postMonth}/${postImage}` : `${imagePath}/Author.jpg`
     },
@@ -84,9 +84,9 @@ export default {
     postUrl () {
       const siteUrl = this.config.siteUrl
       const pathPrefix = this.config.pathPrefix
-      const postSlug = this.$page.post.slug
+      const postPath = this.$page.post.path
 
-      return postSlug ? `${siteUrl}${pathPrefix}/${postSlug}/` : `${siteUrl}${pathPrefix}/${slugify(this.$page.post.title)}/`
+      return postPath ? `${siteUrl}${pathPrefix}/${postPath}/` : `${siteUrl}${pathPrefix}/${slugify(this.$page.post.title)}/`
     }
   },
   methods: {
@@ -109,7 +109,6 @@ export default {
 query Post ($id: ID!) {
   post: post (id: $id) {
     title
-    slug
     path
     date (format: "DD MMMM YYYY")
     timeToRead

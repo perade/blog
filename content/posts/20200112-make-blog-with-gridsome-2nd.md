@@ -1,6 +1,6 @@
 ---
 title: "Gridsome으로 블로그 개설하기 - 본격적인 블로그 만들기"
-slug: "make-blog-with-gridsome-2nd"
+path: "make-blog-with-gridsome-2nd"
 date: 2020-01-12 01:00:00
 published: true
 tags: ['Vue', 'Gridsome']
