@@ -6,9 +6,37 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  * @author Rose Pritchard
  */
 
+pre {
+  padding: calc(var(--space) / 2);
+	font-size: .9em;
+	color: #ffffff;
+  background-color: #2d2d2d;
+  margin-bottom: 2em;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+code {
+	background-color: #2d2d2d;
+	font-size: .9em;
+	color: #ffffff;
+}
+
+pre > code {
+	background-color: #2d2d2d;
+	font-size: .9em;
+	color: #ffffff;
+}
+
+:not(pre) > code {
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius);
+  padding: .2em .5em;
+}
+
  code[class*="language-"],
  pre[class*="language-"] {
-	 color: #ccc;
+	 color: #ffffff;
 	 background: none;
 	 font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	 font-size: 1em;
@@ -30,6 +58,13 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
 	 hyphens: none;
  
  }
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
  
  /* Code blocks */
  pre[class*="language-"] {
