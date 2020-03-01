@@ -1,0 +1,35 @@
+body[data-theme="dark"] .gist .gist-file {
+  border: none;
+}
+body[data-theme="dark"] .gist .gist-data {
+  background-color: #000000;
+}
+body[data-theme="dark"] .gist .gist-data table {
+  background-color: #000000;
+}
+body[data-theme="dark"] .gist .line-data, body[data-theme="dark"] .gist .file-data, body[data-theme="dark"] .gist .line-numbers {
+  color: #ffffff;
+  background: #434343;
+}
+body[data-theme="dark"] .gist .gist-meta {
+  color: #ffffff;
+  background: #000000;
+}
+body[data-theme="dark"] .gist .pl-vo, body[data-theme="dark"] .gist .pl-v, body[data-theme="dark"] .gist .pl-vpf {
+  color: #ffffff;
+}
+body[data-theme="dark"] .gist .pl-en, body[data-theme="dark"] .gist .pl-c1, body[data-theme="dark"] .gist .pl-s3 {
+  color: #ECAC29;
+}
+body[data-theme="dark"] .gist .pl-k, body[data-theme="dark"] .gist .pl-st {
+  color: #7373F2;
+}
+body[data-theme="dark"] .gist .pl-s1, body[data-theme="dark"] .gist .pl-pds {
+  color: #76A22F;
+}
+body[data-theme="dark"] .gist .pl-smi, body[data-theme="dark"] .gist .pl-v {
+  color: #cc1a1a;
+}
+body[data-theme="dark"] .gist .pl-s, body[data-theme="dark"] .gist .pl-kos {
+  color: #c8c8c8;
+}
