@@ -3,7 +3,7 @@ title: "Gridsome으로 블로그 개설하기 - 시작하기에 앞서"
 path: "make-blog-with-gridsome-1st"
 date: 2020-01-12 00:00:00
 published: true
-tags: ['Vue', 'Gridsome']
+tags: ['Vue.js', 'Gridsome']
 canonical_url: false
 description: "Gridsome 이라는 Vue.js 기반 정적 사이트 생성기(Static Site Generator, SSG)와 gh-pages를 활용하여 블로그를 개설하는 방법을 다룬다. 첫 번째 포스팅은 Gridsome이 무엇인지, 다른 정적 사이트 생성기와 비교하여 어떤 특징이 있는지 간략하게 살펴본다."
 ---
