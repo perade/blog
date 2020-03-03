@@ -47,6 +47,7 @@ blockquote {
   border-left: 4px solid var(--border-color);
   padding-left: calc(var(--space) / 2);
   color: var(--title-color);
+  background-color: var(--block-color);
 }
 
 em {

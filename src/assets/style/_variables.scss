@@ -11,7 +11,8 @@ body {
  	--body-color: #444;
  	--title-color: #111;
  	--link-color: #6b17e6;
- 	--border-color:  rgba(0,0,0,.1);;
+	--border-color:  rgba(0,0,0,.1);
+	--block-color: #F0F8FF;
   --space: 3.5rem;
   --content-width: 860px;
   --header-height: 80px;
@@ -35,8 +36,9 @@ body[data-theme="dark"] {
  	--bg-color: #0D2538;
  	--bg-content-color: #0f2d44;
  	--bg-code: rgba(0,0,0,.3);
- 	--border-color:  rgba(255,255,255,.1);;
+ 	--border-color:  rgba(255,255,255,.1);
  	--body-color: #ced8de;
  	--title-color: #fff;
- 	--link-color: #af9cef;
+	--link-color: #af9cef;
+	--block-color: #2F4F4F;
 }
