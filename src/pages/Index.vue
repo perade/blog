@@ -13,7 +13,7 @@
 
 <page-query>
 query Home ($page: Int) {
-  posts: allPost (page: $page, perPage: 5) @paginate {
+  posts: allPost (page: $page, perPage: 10) @paginate {
     totalCount
     pageInfo {
       totalPages
