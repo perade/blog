@@ -27,7 +27,7 @@ query Home ($page: Int) {
       date (format: "DD MMMM YYYY")
       timeToRead
       description
-      path
+      hasImage
       tags {
         id
         title

@@ -75,7 +75,7 @@ export default {
       const postMonth = moment(this.$page.post.date, 'DD MMMM YYYY').format('MM')
       const postImage = `${postPath}.jpg` || `${postPath}.png` || ''
       
-      return postImage ? `${imagePath}/${postYear}/${postMonth}/${postImage}` : `${imagePath}/Author.jpg`
+      return this.$page.post.hasImage ? `${imagePath}/${postYear}/${postMonth}/${postImage}` : `${imagePath}/Author.jpg`
     },
     postIsOlderThanOneYear () {
       const postDate = moment(this.$page.post.date, 'DD MMMM YYYY')
@@ -112,6 +112,7 @@ query Post ($id: ID!) {
     path
     date (format: "DD MMMM YYYY")
     timeToRead
+    hasImage
     tags {
       id
       title
