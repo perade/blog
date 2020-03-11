@@ -5,6 +5,7 @@ date: 2020-02-17 00:00:00
 published: true
 tags: ['Vue.js']
 canonical_url: false
+hasImage: false
 description: "Vue.js에서 데이터 변경에 반응하여 후속 동작을 취해야 할 때 computed와 watch 속성을 흔히 사용한다. 언뜻 비슷해 보이는 두 속성의 차이점은 무엇인지, 상황 별로 어느 것을 사용해야 적합한지 알아본다."
 ---
 

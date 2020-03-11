@@ -5,6 +5,7 @@ date: 2020-03-04 00:00:00
 published: true
 tags: ['JavaScript', 'Translation']
 canonical_url: false
+hasImage: false
 description: "async 함수를 작성할 때 사용하는 await, return, return await 각각의 차이점을 알아본다."
 ---
 

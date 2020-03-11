@@ -5,6 +5,7 @@ date: 2020-01-06 00:00:00
 published: true
 tags: ['Essay']
 canonical_url: false
+hasImage: false
 description: "개발을 시작한 이래로 이렇게 글의 형태로 회고를 기록하는 것은 처음인듯 하다. 회고라는 것이 객관적으로 본인을 돌아보고 반성과 깨달음, 성취감과 자신감 등을 얻는 게 목적이지 남에게 공유하는 것은 부수적인 것이라고 생각했기 때문이다."
 ---
 

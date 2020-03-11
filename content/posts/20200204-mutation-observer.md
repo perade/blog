@@ -5,6 +5,7 @@ date: 2020-02-04 00:00:00
 published: true
 tags: ['JavaScript', 'HTML']
 canonical_url: false
+hasImage: false
 description: "Web API 중 하나인 MutationObserver의 기능과 용도를 간단한 예제 코드와 함께 알아본다."
 ---
 
