@@ -70,7 +70,7 @@ export default {
     },
     ogImageUrl () {
       const imagePath = `${this.config.siteUrl}${this.config.pathPrefix}/images`
-      const postPath = this.$page.post.path
+      const postPath = this.$page.post.path.replace(/\//g, '')
       const postYear = moment(this.$page.post.date, 'DD MMMM YYYY').format('YYYY')
       const postMonth = moment(this.$page.post.date, 'DD MMMM YYYY').format('MM')
       const postImage = `${postPath}.jpg` || `${postPath}.png` || ''
@@ -84,7 +84,7 @@ export default {
     postUrl () {
       const siteUrl = this.config.siteUrl
       const pathPrefix = this.config.pathPrefix
-      const postPath = this.$page.post.path
+      const postPath = this.$page.post.path.replace(/\//g, '')
 
       return postPath ? `${siteUrl}${pathPrefix}/${postPath}/` : `${siteUrl}${pathPrefix}/${slugify(this.$page.post.title)}/`
     }
