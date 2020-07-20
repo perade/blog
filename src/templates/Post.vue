@@ -73,7 +73,7 @@ export default {
       const postPath = this.$page.post.path.replace(/\//g, '')
       const postYear = moment(this.$page.post.date, 'DD MMMM YYYY').format('YYYY')
       const postMonth = moment(this.$page.post.date, 'DD MMMM YYYY').format('MM')
-      const postImage = `${postPath}.jpg` || `${postPath}.png` || ''
+      const postImage = `${postPath}.jpg` || `${postPath}.png` || `${postPath}.jpeg` || ''
       
       return this.$page.post.hasImage ? `${imagePath}/${postYear}/${postMonth}/${postImage}` : `${imagePath}/Author.jpg`
     },
