@@ -15,7 +15,7 @@ description: "Vue.js의 메이저 버전을 준비하며 얻은 교훈들"
 - 주요 브라우저에서 JavaScript 신규 기능들의 가용성을 어느정도 보장함
 - 시간이 흐르면서 현재 코드베이스의 설계 및 구조에서 오는 문제점들이 드러남
 
-![image](./images/the-process-making-vue3.jpeg)
+![image](./images/the-process-making-vue3.jpg)
 
 ***
 
