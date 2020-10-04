@@ -33,7 +33,10 @@ module.exports = {
         remark: {
           plugins: [
             [ '@noxify/gridsome-plugin-remark-embed', {
-                'enabledProviders' : ['Gist'],
+                'enabledProviders' : ['Gist', 'Codesandbox'],
+                'Codesandbox': {
+                  editorsize: 100,
+                }
             }]
           ]
         }
