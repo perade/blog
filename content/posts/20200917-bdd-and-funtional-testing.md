@@ -3,7 +3,7 @@ title: "[번역] Behavior Driven Development(BDD) and Functional Testing"
 path: "bdd-and-funtional-testing"
 date: 2020-09-17 00:00:00
 published: true
-tags: ['Translation', 'Development']
+tags: ['Translation', 'Testing', 'Development']
 canonical_url: false
 hasImage: true
 description: "BDD, Funtional Testing의 개념과 그 필요성에 대해 알아본다."
@@ -17,7 +17,7 @@ description: "BDD, Funtional Testing의 개념과 그 필요성에 대해 알아
 
 시스템 테스트에는 행위 주도 개발(이하 BDD), 기능 테스트(Funtional test)를 포함한 여러 가지 방법론들이 있다.
 
-![image](./images/behavior-driven-development.png)
+![image](./images/bdd-and-funtional-testing.png)
 
 ***
 
@@ -131,6 +131,7 @@ BDD 지지자들은 [Cucumber](https://github.com/cucumber/cucumber-js/)와 같�
 ***단위 테스트는 제품을 올바르게 구축하는데 도움이 된다.(Verification)***
 
 (참고 1) [Validation & Verification](https://en.wikipedia.org/wiki/Software_verification_and_validation)
+
 (참고 2) [Barry Boehm](https://en.wikipedia.org/wiki/Barry_Boehm)은 올바른 제품을 구축하는 것과 제품을 올바르게 구축하는 것에 대한 차이를 간결하게 설명했다.
 
 ***
@@ -144,3 +145,8 @@ BDD 지지자들은 [Cucumber](https://github.com/cucumber/cucumber-js/)와 같�
 - 모바일을 포함한 여러 디바이스에서 테스트를 실행해야 한다.
 - 테스트 실패에 대한 스냅샷을 찍으면 좋다. 테스트가 잘못된 부분을 제대로 잡아내지 못할 경우 스냅샷이 유용할 수 있다.
 - 기능 테스트 실행을 10분 미만으로 유지해야 한다. 안 그러면 각 기능 테스트에 대한 작업과 잘못된 부분을 수정하는 사이에 너무 많은 지연이 발생한다. 10분이면 다음 테스트를 실행하는데 충분하며, 10분 이상 지난 후 테스트가 실패하면 다음 테스트로 넘어간 개발자가 하던 작업을 중단하고 다시 돌아와서 작업해야 하므로 비효율적이다. 이렇게 중단된 작업은 완료하는데 평균 두 배의 시간이 걸리고 에러도 대략 두 배 정도 포함된다.
+- 테스트에 실패하면 CI/CD 파이프라이닝을 멈추도록 설정하는게 좋다. 자동화된 테스트의 큰 장점 중 하나는 작동하던 기능의 버그로부터 고객들을 보호할 수 있다는 것이다. 이러한 테스트 성공여부에 따른 CI/CD 프로세스를 자동화할 수 있으므로 배포 시 버그가 없다는 확신을 가질 수 있다. CI/CD 파이프라인에서 테스트를 수행하면 개발팀의 생산성을 크게 떨어뜨리는 변화에 대한 두려움도 효과적으로 제거할 수 있다.
+
+***
+
+*역주: 원문의 내용 중 TestCafe 등 특정 테스트 도구에 관한 내용은 제외하였습니다.*
