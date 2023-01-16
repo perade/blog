@@ -15,10 +15,11 @@ description: "웹 개발 시 iOS를 대응하는 도중 맞닥뜨릴 수 있는 
 
 # getUserMedia 지원
 
-- 사파리 외 브라우저에선 getUserMedia를 지원하지 않음
+- ***TL;DR*** 사파리 외 브라우저에선 getUserMedia를 지원하지 않음
 - iOS에 들어가는 타사 브라우저들은 iOS WebKit 엔진을 사용하여 구현해야 함
-- 애플이 해당 엔진에선 저 기능을 지원 안하고, 사파리에서만 허용해놓음
+- 애플이 해당 엔진에서 저 기능을 범용적으로 열어놓지 않고, 사파리에서만 허용해놓음
     
+#### 참고
 [Chrome and Firefox are not able to access iPhone Camera](https://stackoverflow.com/a/53093348)
     
 [752458 - chromium - An open-source project to help move the web forward. - Monorail](https://bugs.chromium.org/p/chromium/issues/detail?id=752458)
@@ -29,26 +30,28 @@ description: "웹 개발 시 iOS를 대응하는 도중 맞닥뜨릴 수 있는 
 
 # img 태그 이슈
 
-- 사파리에선 img 태그 안에 태그보다 큰 이미지를 넣으면 제대로 안나옴
+- ***TL;DR*** 사파리에선 img 태그 안에 선언된 속성보다 큰 이미지를 바인딩하면 제대로 안나옴
 
 ```JavaScript
+// 동적으로 받아온 이미지의 크기
 .some-image {
 	width: 30px;
 	height: 30px;
 }
 
 <img src="some-image" width: "10px", height="10px" />
-
-이러면 새로고침해야 나오거나 아예 안나오거나 등 제대로 동작 안함
 ```
+
+이런 식으로 구현되어 있으면 새로고침해야 나오거나 아예 안나오는 등 제대로 동작하지 않으므로, 이미지를 동적으로 바인딩하는 경우 주의해야 함
 
 ***
 
 # 이미지 포맷 변환
 
-- HEIC 이미지를 타사 브라우저나 앱으로 전송하면 자동으로 JPEG 포맷으로 변환되어 전송됨
-- iOS 11 에 HEIC 이미지가 추가되었는데, 다른 플랫폼과 서비스에서 해당 이미지를 읽어들이지 못하는 오류가 있었음
+- ***TL;DR*** HEIC 이미지를 타사 브라우저나 앱으로 전송(파일 업로드 등)하면 자동으로 JPEG 포맷으로 변환되어 전송됨
+- iOS 11 에 HEIC 포맷의 이미지가 추가되었는데, 다른 플랫폼과 서비스에서 해당 이미지를 읽어들이지 못하는 오류가 있었음
 - 하여 애플에서 해당 포맷은 전송 시 자동으로 JPEG으로 변환하도록 수정함
 
+#### 참고
 [I thought iOS was supposed to convert HEIC images to JPEG automatically behind-t... | Hacker News](https://news.ycombinator.com/item?id=23260987)
 
