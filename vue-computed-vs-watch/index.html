@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
   <head>
-    <title>[Vue.js] computed vs watch - computed와 watch의 차이점 | perade</title><meta name="gridsome:hash" content="582c7d7f1830e21cd8da3b722540619f36e8e668"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.12"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="Vue.js에서 데이터 변경에 반응하여 후속 동작을 취해야 할 때 computed와 watch 속성을 흔히 사용한다. 언뜻 비슷해 보이는 두 속성의 차이점은 무엇인지, 상황 별로 어느 것을 사용해야 적합한지 알아본다."><meta data-vue-tag="ssr" property="og:type" content="article"><meta data-vue-tag="ssr" property="og:title" content="[Vue.js] computed vs watch - computed와 watch의 차이점"><meta data-vue-tag="ssr" property="og:description" content="Vue.js에서 데이터 변경에 반응하여 후속 동작을 취해야 할 때 computed와 watch 속성을 흔히 사용한다. 언뜻 비슷해 보이는 두 속성의 차이점은 무엇인지, 상황 별로 어느 것을 사용해야 적합한지 알아본다."><meta data-vue-tag="ssr" property="og:url" content="https://perade.github.io/blog/vue-computed-vs-watch/"><meta data-vue-tag="ssr" property="og:image" content="https://perade.github.io/blog/images/Author.jpg"><meta data-vue-tag="ssr" property="article:published_time" content="2020-02-17"><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/blog/assets/static/favicon.ce0531f.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/blog/assets/static/favicon.ac8d93a.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="96x96" href="/blog/assets/static/favicon.b9532cc.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="76x76" href="/blog/assets/static/favicon.f22e9f3.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;display=swap&amp;subset=korean"><link rel="preload" href="/blog/assets/css/0.styles.29ec0a33.css" as="style"><link rel="preload" href="/blog/assets/js/app.e677d8b5.js" as="script"><link rel="preload" href="/blog/assets/js/page--src-templates-post-vue.107e5aaa.js" as="script"><link rel="prefetch" href="/blog/assets/js/page--node-modules-gridsome-app-pages-404-vue.44105d92.js"><link rel="prefetch" href="/blog/assets/js/page--src-pages-index-vue.f9d6fd4b.js"><link rel="prefetch" href="/blog/assets/js/page--src-templates-tag-vue.84c53416.js"><link rel="prefetch" href="/blog/assets/js/vendors~page--src-templates-post-vue.ffac18bc.js"><link rel="stylesheet" href="/blog/assets/css/0.styles.29ec0a33.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+    <title>[Vue.js] computed vs watch - computed와 watch의 차이점 | perade</title><meta name="gridsome:hash" content="843e47f385d56c2b19388c4509fc534a1d06489c"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.21"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="Vue.js에서 데이터 변경에 반응하여 후속 동작을 취해야 할 때 computed와 watch 속성을 흔히 사용한다. 언뜻 비슷해 보이는 두 속성의 차이점은 무엇인지, 상황 별로 어느 것을 사용해야 적합한지 알아본다."><meta data-vue-tag="ssr" property="og:type" content="article"><meta data-vue-tag="ssr" property="og:title" content="[Vue.js] computed vs watch - computed와 watch의 차이점"><meta data-vue-tag="ssr" property="og:description" content="Vue.js에서 데이터 변경에 반응하여 후속 동작을 취해야 할 때 computed와 watch 속성을 흔히 사용한다. 언뜻 비슷해 보이는 두 속성의 차이점은 무엇인지, 상황 별로 어느 것을 사용해야 적합한지 알아본다."><meta data-vue-tag="ssr" property="og:url" content="https://perade.github.io/blog/vue-computed-vs-watch/"><meta data-vue-tag="ssr" property="og:image" content="https://perade.github.io/blog/images/Author.jpg"><meta data-vue-tag="ssr" property="article:published_time" content="2020-02-17"><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/blog/assets/static/favicon.ce0531f.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/blog/assets/static/favicon.ac8d93a.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="96x96" href="/blog/assets/static/favicon.b9532cc.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="76x76" href="/blog/assets/static/favicon.f22e9f3.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;display=swap&amp;subset=korean"><link rel="preload" href="/blog/assets/css/0.styles.d9a4cdc1.css" as="style"><link rel="preload" href="/blog/assets/js/app.11cf6a80.js" as="script"><link rel="preload" href="/blog/assets/js/page--src-templates-post-vue.1ab9b8d0.js" as="script"><link rel="prefetch" href="/blog/assets/js/page--node-modules-gridsome-app-pages-404-vue.78d9cc21.js"><link rel="prefetch" href="/blog/assets/js/page--src-pages-index-vue.4845d9ff.js"><link rel="prefetch" href="/blog/assets/js/page--src-templates-tag-vue.b2eea100.js"><link rel="prefetch" href="/blog/assets/js/vendors~page--src-templates-post-vue.4a5f8fb0.js"><link rel="stylesheet" href="/blog/assets/css/0.styles.d9a4cdc1.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
   </head>
   <body >
     <script>
@@ -38,122 +38,148 @@
 
     <div id="app" data-server-rendered="true"><header class="header"><div class="header__left"><a href="/blog/" class="logo active"><span class="logo__text">
     ← Home
-  </span></a></div><div class="header__right"><div class="toggle"><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><img alt="Github image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 22 22' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cimage x='0' y='0' width='22' height='22' xlink:href='data:image/png%3bbase64%2ciVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAALgElEQVR42s1baawlRRW%2by3MZwBnUrur3lCeLqENMnBjir1EUFESUAc0El/ADIqKJGEWMBiECRglLNMYlOuokYCASDMgykBB1BowL0YlbNJEIgxNFJC4zw%2bLA7Xv7%2bZ3uc6pPVfe9t%2b7c9959Lznpfn2rq%2bqcOvs53WpN8ZcaA7AFlP/bNqCbJrbtj7Nta8yCTcybcP9%2bwMcAlwGuYPgs4KOA92LOzbimMqeeg%2bbGPG3%2b31t7Vf9oUZvYggBuc4ntemMSezyeXwDYnibmj7g%2bBQIMcF2at2kj0G8AGvMk4PdYYxveOQ9zHRus36U19SHQflYNef/ETVf9ZgEXAnYCng4Q0whm1tgeEOtZAmN69Ix/c2PV%2b0SQ%2bzD%2bfFxfrDhQEQJEWGlusHLiSUH1CvHEHIv/vwT4Z7FpRgDjM4VYDgTy4lqBIFs9S4zcD/jdrCCGccT4O%2bCLgJd7HJE4blwBxEuE%2bb449Q4vdiQWvpbYW500bbhvBWl6ltQQHgcYa2R8znP1HTHKtf6LfV2J6%2bHMDR3NDelyiUQpX466mt3fB/ibQzxRJ12d6tIyQB7MOQgI8TBgi9I93fDQpkJe3c/xAutxf5Nj86SQ30HDZlcC9PwD0iHVb2Yb4IWiG5R4Toc8c0CXkX8d4CGiPOS7j8n7ik1XEnEPrE8I2sOAueF3gFexvuo2HeSEyBvNUmfg%2bTPM7r2ALVcNeXXinmiQVSFFSboBcFKNE2KJoE9eZB4In6MWz2aLeKNIyD56ao/v0HorSic0KTxc3%2bMWVCy/BpAfphsy1k2kl04NcBlNBHX68sJJSsH1A%2b2es7krZNAmldlis7fsSFo2jbwWKUGsbfqytg2IAPgf4PUeTsPMY%2bXkWLbx5mjc/4vlLQuRl8VY7uQ3jDPLbQqbTGCuzOCSrTtVmgh7AcbHzQ45%2bcRd4dubn5Xa3smV9tJk4V%2bQ24vrX/WGMM5t0ia%2bsuRTFAIOlMPEv5m8gYB5YPsJ9gB%2bDPi1LwbV%2b4ViLMffK4dc44BUPbQV63%2beX%2bwFJy6nQJPvUaJyBOAUPIMttvsbnKOs9PvNIOLEB7xuVhCnJKYg/m/A1wAUVR7Gh/Ui3D/BexqEihHPsuIgE3OJrxRZH6jT77Dj8IYGE6dZjCe027WDpLhpEYt9RRYOghpBkGTzAIi/D9d95b09yBzmjefrQcA1gPkwKuTrbTwuaxCFAXMlrbmRka9EwbLf7HSAMbuKyZKa3Mu9sNVHZBNMzY52lUGETXj%2bAJ49jrlv5bj/A5ifTu/VHPMfyTCP5xsBpHTPBVxFSPHJ3icbV4FPxyozjftLec89T0QrxSyHcQfj2Paix1Q8PWPOYaXWHx61OVP4ztDEDAmR10/hiq9vzgH41goEPldxQN5gOegq4vd2L67RGwfFdmuTZ%2bvmTBPkrRJ8FMrFJSacH9FR/jhlhOYYiU4ZURZZInmvzYTr8Jg5yfywA9PRzowCIf67FbvnQ6xIxoe7U3RfkURRk5ytkB/m25MlEEqeHkaIzI6hN9nWinZUmFrpI6Peta1hToy46RSZBpzb4EMU/onog5N5nU5xOkyRexsUSX0iyBmPO48VSlf0x2qn5VyEauzFTTqgAUQXfN/j0lIBFZp2lJsbKpSbmS3bs0hMlkkPJ247iAOsr7ua9s8m3CBgMot6sk%2bVFKwpkaEEAOLfcU7TjAggiVDc31oeilguMwqHjHG9QE%2b2c750XPpjnJQ%2bOzi/BbxAlGdrRn/KKmwA/IWRH4sD5zPuEPZfYEdkHPvnyq6%2buckErjYHBHs4kxXcIEYMyD/BIW4gFt7SkGUZSrmUKQdidEQz2xkQQJtEy4UYPNs170euo0SZzPxbaPOXK78/HxFr93nyM2d9%2bhURalwwzCFaavZmzUX00s1jzJ9mm8fIhVWlqtas/5gDxLc/Dvf7vBigOacoinwbvfRL7QCNsp9QHLtUrW8mrD/MHNqqbvGbMWKg3Hngk3IsP4JiuSLATU0R4Fr4U2JwT4RDJ7g%2bTC88NSp7w/GAEODrKjBZO8ireCFCpDWuB1oqcTDeeTD2m6oouZZOX%2buBWyYgQN6KyN3lLrmRmO/pIGSNisDdEQRwOLd0ETKCA3ZUSRCzJhCX1JYSgZ/zXvuxHPB0BBeID/ArtVBrTZjBpHLEcH8Y9vTnNN4ZepI4YG%2bEFZDfnsBiR3Hcv0b8AE8BbuRmipF%2bgPrtEaJajB%2bQK4qeLInFWXNBU2Yo0hMUXHbFmo0lFUZet1Zc4XpAZL49ES7Gfote5liAsilmLNXgC1BDwjrthc0mGqzSZryXlxQR3vDcoMoUu6xWEQtsiSx45qomcKHfNLG6RNCih71IWuwzKimSx0SDAIoGzTwQOBBDBMtJRVwpKHqpzqutlj4IutREDI/mAsuSS3yOV%2biPu7Q7bn5SZlVNjOkQXXBnLTubmBUjRBX7m5buAClFwdzPWeEsyqSXNc8f6skvadCeYZfWoCExeoPuIdLpseXq0vLZ3dUQRPTIEt0eKL4oMcb1g3qRjVZlhavUl68Uy2KlEMJwhogqtOYYv3RVmMh2ufnJ%2b/ccwpxt4qJN1yu9GXsC/n%2bQTzMbIuPD2J/aaBbDxOIOj5JChDIahLxQKtlzJHJVbdlP/b6WkyW65wDvz9mSKGMJEbbnNMUceP4K7O1qzH0w6AOI6UfwUvqF/lKKZEtQGZKsyXZbFj6P56LlI4E3VZWvk6KY%2bV0Q6wy8sxCKQYxYNFR/5gqkjd1KGydlpxoj%2bpHIS9/AwGn/8oA6uiOMGp53s5bvB2kw6bU5jVpOqMrKxMl0/2/QwEC1/Psx5kZcPwl43gQccERB7MTegn09WHSiGlVir/oOIpK5tQrxzlrTlOqf2crOTr/Bn76aX9xKVeSiWbIqpjgzyfLoTmYhnafrp4Xl0hFlNHasRCSv43d1g1bmTLHfSRLTRSa4nOb1EYbmhZQaOzvqdM2Akb2MuYVY8sOqnpAFvXu5ks2fTigC7YpY9g8NDVr5CI91XDnvdqlWO%2bviEE9cA/SJQesrITZQGaNNeGcR189Rj4CyEH1uqhB4jhf9uOc1RomAkbFXRQQ3I5G3fofIa2rNUuJT%2b%2bVmcyWfeK%2beGbY/Uhumbo6vYtye2ocQ5TvUWXqinGhMEoVL6bLB0w%2bpL1E1cxEns4v8iaE9g9r8VD%2baB8JGKdX/90YedxGFx4ViLJXdDwB3sba%2bviqixHuIQYBzQkN/4iQttD0W57vD3oVRGrjDSmJRdV%2bJjIss3RO8%2byGMuYLvb2Df/F2ALx9KsKQIcBSJUjwBFPKVDnsU97W4ZWSpqfKz7WapGFu5VidybbBpamtZB2TfRhvHuHVkzg4lUFIEeBng2UgC5A1Nks9g35v87wjs%2bKKj34BkzwrK41oL3yaKZeScE3aQpFWx8xhPBCdDnq6nBLi0JvLEGhumIQZcLJE6O53QnYBL%2bZO4s9hruxjjrpeGxknKaEIAqvWNIQCX7R3by9jnxN5XPo5pRWeyg2YlIcKpqorU01mipq/DlLtqmAuiGynUt4FDCWD9Ri7du0Qe6OawgWuKjya8pONrAX9ic9hXidSM3WLuGjeSPvsPiJhO2kmidEAzARIPef3FyG6sedzUyI8Rh8NZ07tvhrwe3cTlD4raG9gznZQDRhBA9QCbAX%2bvJBzxDaz1/FDmp/6gsikFxfck54/qz%2bWoGTrw0YkAdioOSHwC2Hrg9ZB0rdZSdMtVvap9LVq5zfQF2Rd0hzh9LMkfTNKp7MfYBa3Y4nSAI8Ar01LJ5t5HlOVa9C3D5VWGeoW%2bGxynF1ySouzmfkx3eeP0n3UfK0zEAU4JLjqlWoXDezlUXvCyUMZOJ%2b%2bT1OJt8LW42gjl5s8H4tTh/Q/6QlxOP53AFwii02s4g7uDY48NAeLqa/JVKtiGn66HhBiX5ZlUATeVwpWvMFUm%2bv8m4ljgU0eeEwAAAABJRU5ErkJggg==' /%3e%3c/svg%3e" width="22" data-src="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png" data-srcset="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png 22w" data-sizes="(max-width: 22px) 100vw, 22px" class="g-image g-image--lazy g-image--loading"><noscript><img src="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png" class="g-image g-image--loaded" width="22" alt="Github image"></noscript></button><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div></div></header><main class="main"><div class="post-title"><h1 class="post-title__text">
+  </span></a></div><div class="header__right"><div class="toggle"><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><img alt="Github image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 22 22' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cimage x='0' y='0' width='22' height='22' xlink:href='data:image/png%3bbase64%2ciVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAALmElEQVR42s1be8wcVRXf3e9TKWBBmXv3%2b5SPR0UtMbExxL%2bqWFAQEaqQpqDhD4iIJmIUMRpoo2CU8IjG%2bIhWbQKGBoIBeRQSY2nByCPQ%2bIomEqFAFCtB%2b%2bDdfcz6OzPn3Dn3fndnZ7/9%2bu1ucjKzM3PvnHPuOeee19RqI/yaiak1DYHN/xtbB0w1E1v3nsN1m5hZwAdx/inAF/HMBhy/yXAl4AuA86wxq3Fsypx6Dprbmnxuui%2bw5D96qU1sRrxDLrFTPnPsCbh%2bMWAzGPVXHF8CA7o49mZsMwp0D0DPvAj4M%2bbYhDEX4vz44P1TTccI4/BZMuLDFVf3LJC%2bBMftgJcDwjSBbSDcahIYAkPHNt9zz6rxxJDf4PmLcHyLkkDFiCWQBkV4DaLqCMcqHY9r3wX8J0OaCcD1tiIsBdFpdjQmOypi3XWMkXtdHtvOmGEcM/4F%2bA7g7Z5EJMbDcVF/lnSdX4BzrLpp8MuOxPl1JN5qpYGw6VgmOrvGhAeSUAbueWYKzdVxzMjftQfXr8LxMFaFxkGRhly/HHe1uJ8P%2bKdPuCJ6OIIrMaOZS0c3YMSTgLVaGtyijcoEPQHOp/m4HHCzEvOW0t10EQkvZwbeaXMbIvc2AQ5haZjSO9XI%2bk7Ghi37ewFPEOdBeIdgiQgvUZFMNbosDX8CvDMiraMTD2LPxP9XGIFWIOpLSTyDZ0jp2CJDSbYBi3RyhrOWhKpM8IhnLmLC9e7FSa5/4yM8KgmpWhixRx8b2iaIZ6cH4niuIr4zQcQHjDCpXiDeOU7zmDBod1CrL8SfrAycJr7H%2b3WHocv/DyZzQpHnrTGzQ27L5CNLqXkVx/d5NPUzikI8CGmw/hwLbr6gRKoX03vWO1kF8gEWeyvUDJctMFXbYE8xX79TcH4WYJjGRtQeuJVP3BG%2bvfk9W/tWH30jC/wwub04PqMR0kiy9%2bePT9jrA7NYVHNPsPACfQZm1007eMcuwDbA4/78hXEk3Pn5%2b3hRHY2K%2bOKiLUT/WzywFUG%2by8TvUqpyOOBUm%2b/F%2b4qVyXx%2bWbWWjB0AXY4R2rk3qQhP7H9x/kMARZWH8mK9GYQ9r%2bIMj4nkjvNCXu6rAtsDpfcNvvH%2bYgXmrUi2uvmEdrN2kJQ0zQHx71t%2bLghqBMlXgdB%2brOxevG8v/u8HvKZFW4/le9cCZsKokI%2b3Zzg53fdUQZhO9mDlPFXILGOSBTcy6Q7mWDuix/l%2bmyP1eUGCQ%2bOG53wkZhWuP4hruzH3bRz3fxrntHrv4pj/SIYZvG8lG90LAFcTUcDr%2bSwKZMRV4NPgbU2s%2bxW5hJhWBF%2b3aDjeyVJf90Jo5%2bkZs56NWiem8xyxyW7w8UBtVIjsOSDLR3DFl8dzAP5uBRwuYALbEXzFNogkfFTj7SEOru7UW54yYMWExbUPFxJgVGLCeCrFDK4DkWkmAquX5RHq%2bb5sJK9AzzT4mWmKOpUD09DOjAJh/jmssl3nD8SkIF/c7WL7MglQk3xSEQ/ORbawYiui/2eEPnfobDCS9czBSuxAl7TYjYzMUw/mChw3wd2cL5Jr41sv7zKMe2JO4fGNbHV4i7hPiVHfPVltLRfmq5Kt2FjSciBAItTL1K7V1/egXYmfu8WTUnBwJVvaMMjolRiULUWCZFwMMCIJW0kCbOLZrtjiifTuAZ1zerKvKsuflnpkbhs0P3dO05gYYAu1us3fBk2UBs4utdmnuFhPtn3G9/f7gdz/IyZ4kxjP2ph%2balc4AvCPZhUaICW8gHeK%2bM%2byI1IWyGhXlf5/KHBExiIBAQ5nSxRoy9WY1cDsJsbRwLUqoCgxIKaT637OOQqaxDLbMTBAb4mWCzG4tqOCJKdKGtbQoI1iQcu2EJqUJz973KtfMEFiGHHk%2bjpEvT7e7KU0aMuA7S%2b1xd7/HLmwqihSG/ePJUB8%2bxWAvbzXlwVeYsg30aBHtANUOgBxgvIaa5PCgDyWcaH8HwaoASJacefNDprgmcKN7CsyzABzcywCnISfiknureDQsUdon6QBL0WyKtp70gz4kbxsElY/qFdyJmugSmtDuL%2bmHJx0kATg%2bBMpPEj4PBkMMNoO3DoEA9JahdxdWiQ3zC9jAdCESIGowD0VGOBorlVIYGoJ2Mr77cSogAqNRQIeYlw7VSXg5QpSID7AYzqdNBG7QOKF34fi/9%2bbFZ0hqPGLNU4b98LmhLj7mKWojp4oP0AlTCh1xs0UZfToe08RB6v4Aani6CmhKzwB4u8yQxU9QaFlRxVP0HOGwLDrJ8UVnh8QmZ8NRYuxP6XBGytkUzTXqCFhmU5KjCcadDlICYnfShnooD4QC%2booQerFAmsr1vSUQ2Qv8ZomVAvNUjdq2aJx4%2bsVxF/adeT/GuLkTIV8QGg8KCg6KiwyLIUkBF1qoobHFkFQqfHTBn23S7vj5H5VDxi0d7ItMHfNy86qGP1gES5p98L3z975AOPfrrSl51L8az355RHxSVUtoBvolRiRG3UPkU6PNRepcbFpVENm4moIonq0E90RGL7%2bSR3KFElO0NjP6JesBJGvxVrUgglcNZcqRDzRNiB4XFDBaYifoBouhrbuNu9HlPB7SrvguH4i/j/Kdcp2NOPTX/z3UA3TSyziZVs9TvoND1Tf2xPYglRVW/Zh/JWWkyUKSVqlaakfVi6M8N4eizlw7Rgw9ZoijV%2bJ%2bF4spZ/ZL2VI1gaVIcmabLb5ip7ARcunAoOo6/bkKf4CCJ6JMbOhGlRRi0j1ZxpMBNF2HSEORu5VleZOReJTv6pl1vACNRTXDTU87%2bQcQCew%2bNJrczq1nFCVNdC7sHmRgGr5D2Dem8CMr%2bD8DYMkwBYScDgz%2b1Yg/mjWiWpUiT2vX1TsTTRen4DUBr2MlmoaWMe63on409fwwHW4vz5rlsw9w7ZKnnRZH93KzDZn6Pg1EblmSR6BHStxbK7nsS4rzU3WXWWf0mp9RV5N83SvhU6iKVXV3TZ/dU2Xid3A0kIi%2bTnlP7QDpFJ3LTG/C7O4FYsdpHZ/iTRopf0qPxXKeXfocl7eIVI0QYtDc5LkB4s0mSs20CSrcH0Ox29Qj4DqF%2bqo7nCCA/zSLwWttqXuLR/l2asreXflpTzJ/1GHyLtdVZiNdPjFhzgXVwU9Qjoz/Fu1WtTN8QNMuGvehxD5GOosPUlW1FZwl4P01hkLbL1TPUIum/XlMIjTNiC2DT3Yp1GKzj/Az11K4XFmGBMYu8T8Cud342VbcLyhKKIYl76u6PGJGpyo7FFFBhjdXd7iRbtnYKNk2CyFF8/xtqbtgejSvcHYz1IPEJ/fCELJNz8L8D3tIi%2bg6Hk08DhQnQGeYRScnwY%2bR2nR78%2bEZF6QsVo6wnlr1DvEdQHS07i3DMR%2bhBFfRtvZQgIljBUGvA3wekUGxIh/BXiv0vHKQENsC6PIDUjmE0F5PFVe4u1iWAYQNGzNT4qdxwUqWJa5DomnPsNTw17hSknGSKr5XG0MXbE0L5bQCt0FuII/iQPDDPkTl4GQG6Sh0S5MBVYMYEAaNG7Jswdkv9c9wnbolvm8uUmYcJpUkVT2qBNphOx5fbzcp2uHaKSw1RigV52CM8nykAe6OqxfjPbRRCEJ7wH8TeXdJZHaznyARL4OM2Iv/gcmNoftJBEV0AzwSnf%2bR1j6i5GdeG7FyMTHBiomHJZZevXNkA16dJXzsR/ENLVhG5EBOlTvqkZugh9j3BtDnR/5g8pYCorPSc%2bf1h3itmhUFCcEDMgHDyMBJTZAmKsbqJ%2bQrtX5KbpFylPyh5JiF%2bpqP6UvyL6tO8T1x45Adh%2ben5VusgXYgHc0cyObeh9R5u96AXNuLDLUpmEP9lekfqbGk4ZjuJv7Od3ljdV/XX2sMIQESPOmnXNGtQiHn%2bVQeTbIQo2m78OUomz/b4cpN38RRJ86vP8N2CCrP4w4BtHptZzB3cqxxxEB4fVFF/khSlJRRgzK8gxrgGOlcGUoRxL5/wOi3liE/omO9AAAAABJRU5ErkJggg==' /%3e%3c/svg%3e" width="22" data-src="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png" data-srcset="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png 22w" data-sizes="(max-width: 22px) 100vw, 22px" class="g-image g-image--lazy g-image--loading"><noscript><img src="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png" class="g-image g-image--loaded" width="22" alt="Github image"></noscript></button><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div></div></header><main class="main"><div class="post-title"><h1 class="post-title__text">
       [Vue.js] computed vs watch - computed와 watch의 차이점
     </h1><div class="post-meta">
    17 February 2020 /
-   <strong>2 min read</strong></div></div><div class="post content-box"><div class="post__content"><p>Vue.js를 처음 학습할 때 가장 헷갈렸던 것중 하나가 computed와 watch를 선택해서 사용해야 하는 상황이었다. 언뜻 보면 비슷한 동작을 하는 것 같은데 차이가 있을테니 두 개가 있을 것이고, 이름도 뭔가 계산된거 같은 이름과 지켜보는 듯한 이름으로 차이가 있다. 공식 문서에 두 속성에 대한 개념과 차이점이 잘 정리되어 있지만 되새기는 차원에서 글을 작성해 본다.</p>
+   <strong>3 min read</strong></div></div><div class="post content-box"><div class="post__content"><p>Vue.js를 처음 학습할 때 가장 헷갈렸던 것중 하나가 computed와 watch를 선택해서 사용해야 하는 상황이었다. 언뜻 보면 비슷한 동작을 하는 것 같은데 차이가 있을테니 두 개가 있을 것이고, 이름도 뭔가 계산된거 같은 이름과 지켜보는 듯한 이름으로 차이가 있다. 공식 문서에 두 속성에 대한 개념과 차이점이 잘 정리되어 있지만 되새기는 차원에서 글을 작성해 본다.</p>
 <hr>
 <h1 id="computed"><a href="#computed" aria-hidden="true"><span class="icon icon-link"></span></a>computed</h1>
 <p>computed는 데이터의 변경에 반응하여 특정 값을 반환해주는 일종의 <strong>getter 함수</strong>이다. 아래는 공식 문서의 예제 코드이다.</p>
-<div>
+<div class="gist-embed">
     <div id="gist101580685" class="gist">
-    <div class="gist-file">
+    <div class="gist-file" translate="no">
       <div class="gist-data">
         <div class="js-gist-file-update-container js-task-list-container file-box">
-  <div id="file-vue-computed-example-vue" class="file">
+  <div id="file-vue-computed-example-vue" class="file my-2">
     
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-vue  ">
 
-  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-vue ">
-      
-<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip>
-      <tr>
-        <td id="file-vue-computed-example-vue-L1" class="blob-num js-line-number" data-line-number="1"></td>
-        <td id="file-vue-computed-example-vue-LC1" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">template</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L2" class="blob-num js-line-number" data-line-number="2"></td>
-        <td id="file-vue-computed-example-vue-LC2" class="blob-code blob-code-inner js-file-line">  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>example<span class="pl-pds">&quot;</span></span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L3" class="blob-num js-line-number" data-line-number="3"></td>
-        <td id="file-vue-computed-example-vue-LC3" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;원본 메시지: &quot;{{ message }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L4" class="blob-num js-line-number" data-line-number="4"></td>
-        <td id="file-vue-computed-example-vue-LC4" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;역순으로 표시한 메시지: &quot;{{ reversedMessage }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L5" class="blob-num js-line-number" data-line-number="5"></td>
-        <td id="file-vue-computed-example-vue-LC5" class="blob-code blob-code-inner js-file-line">  &lt;/<span class="pl-ent">div</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L6" class="blob-num js-line-number" data-line-number="6"></td>
-        <td id="file-vue-computed-example-vue-LC6" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">template</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L7" class="blob-num js-line-number" data-line-number="7"></td>
-        <td id="file-vue-computed-example-vue-LC7" class="blob-code blob-code-inner js-file-line">
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table data-hpc class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Vue" data-tagsearch-path="vue-computed-example.vue">
+        <tr>
+          <td id="file-vue-computed-example-vue-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-vue-computed-example-vue-LC1" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">template</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-vue-computed-example-vue-LC2" class="blob-code blob-code-inner js-file-line">  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>example<span class="pl-pds">&quot;</span></span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-vue-computed-example-vue-LC3" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;원본 메시지: &quot;{{ message }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-vue-computed-example-vue-LC4" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;역순으로 표시한 메시지: &quot;{{ reversedMessage }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-vue-computed-example-vue-LC5" class="blob-code blob-code-inner js-file-line">  &lt;/<span class="pl-ent">div</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-vue-computed-example-vue-LC6" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">template</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-vue-computed-example-vue-LC7" class="blob-code blob-code-inner js-file-line">
 </td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L8" class="blob-num js-line-number" data-line-number="8"></td>
-        <td id="file-vue-computed-example-vue-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L9" class="blob-num js-line-number" data-line-number="9"></td>
-        <td id="file-vue-computed-example-vue-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"><span class="pl-k">export</span> <span class="pl-c1">default</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L10" class="blob-num js-line-number" data-line-number="10"></td>
-        <td id="file-vue-computed-example-vue-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>vue-computed-example<span class="pl-pds">&#39;</span></span>,</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L11" class="blob-num js-line-number" data-line-number="11"></td>
-        <td id="file-vue-computed-example-vue-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  <span class="pl-en">data</span>(){</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L12" class="blob-num js-line-number" data-line-number="12"></td>
-        <td id="file-vue-computed-example-vue-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-k">return</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L13" class="blob-num js-line-number" data-line-number="13"></td>
-        <td id="file-vue-computed-example-vue-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      message<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>안녕하세요<span class="pl-pds">&#39;</span></span></span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L14" class="blob-num js-line-number" data-line-number="14"></td>
-        <td id="file-vue-computed-example-vue-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L15" class="blob-num js-line-number" data-line-number="15"></td>
-        <td id="file-vue-computed-example-vue-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  },</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L16" class="blob-num js-line-number" data-line-number="16"></td>
-        <td id="file-vue-computed-example-vue-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  computed<span class="pl-k">:</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L17" class="blob-num js-line-number" data-line-number="17"></td>
-        <td id="file-vue-computed-example-vue-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-c"><span class="pl-c">//</span> 계산된 getter</span></span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L18" class="blob-num js-line-number" data-line-number="18"></td>
-        <td id="file-vue-computed-example-vue-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-en">reversedMessage</span><span class="pl-k">:</span> <span class="pl-k">function</span> () {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L19" class="blob-num js-line-number" data-line-number="19"></td>
-        <td id="file-vue-computed-example-vue-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      <span class="pl-k">return</span> <span class="pl-c1">this</span>.<span class="pl-smi">message</span>.<span class="pl-c1">split</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>).<span class="pl-c1">reverse</span>().<span class="pl-c1">join</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>)</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L20" class="blob-num js-line-number" data-line-number="20"></td>
-        <td id="file-vue-computed-example-vue-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L21" class="blob-num js-line-number" data-line-number="21"></td>
-        <td id="file-vue-computed-example-vue-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L22" class="blob-num js-line-number" data-line-number="22"></td>
-        <td id="file-vue-computed-example-vue-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">}</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-computed-example-vue-L23" class="blob-num js-line-number" data-line-number="23"></td>
-        <td id="file-vue-computed-example-vue-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></td>
-      </tr>
-</table>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-vue-computed-example-vue-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-vue-computed-example-vue-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"><span class="pl-k">export</span> <span class="pl-c1">default</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-vue-computed-example-vue-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>vue-computed-example<span class="pl-pds">&#39;</span></span>,</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-vue-computed-example-vue-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  <span class="pl-en">data</span>(){</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-vue-computed-example-vue-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-k">return</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-vue-computed-example-vue-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      message<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>안녕하세요<span class="pl-pds">&#39;</span></span></span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-vue-computed-example-vue-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-vue-computed-example-vue-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  },</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-vue-computed-example-vue-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  computed<span class="pl-k">:</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-vue-computed-example-vue-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-c"><span class="pl-c">//</span> 계산된 getter</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-vue-computed-example-vue-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-en">reversedMessage</span><span class="pl-k">:</span> <span class="pl-k">function</span> () {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-vue-computed-example-vue-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      <span class="pl-k">return</span> <span class="pl-c1">this</span>.<span class="pl-smi">message</span>.<span class="pl-c1">split</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>).<span class="pl-c1">reverse</span>().<span class="pl-c1">join</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>)</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-vue-computed-example-vue-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-vue-computed-example-vue-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-vue-computed-example-vue-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">}</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-computed-example-vue-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-vue-computed-example-vue-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></td>
+        </tr>
+  </table>
+</div>
 
 
-  </div>
+    </div>
 
   </div>
 </div>
@@ -161,7 +187,9 @@
       </div>
       <div class="gist-meta">
         <a href="https://gist.github.com/perade/cc8d98bddb8e4f96ba3878ce9d347b5f/raw/0945d48faf45be7b1b573f863222f948135fb266/vue-computed-example.vue" style="float:right">view raw</a>
-        <a href="https://gist.github.com/perade/cc8d98bddb8e4f96ba3878ce9d347b5f#file-vue-computed-example-vue">vue-computed-example.vue</a>
+        <a href="https://gist.github.com/perade/cc8d98bddb8e4f96ba3878ce9d347b5f#file-vue-computed-example-vue">
+          vue-computed-example.vue
+        </a>
         hosted with &#10084; by <a href="https://github.com">GitHub</a>
       </div>
     </div>
@@ -172,142 +200,168 @@
 <hr>
 <h1 id="watch"><a href="#watch" aria-hidden="true"><span class="icon icon-link"></span></a>watch</h1>
 <p>watch는 computed와 비슷하지만 <strong>특정 데이터가 변경되었을 때 지정한 Callback 함수를 실행</strong>하는, 즉 사용 목적이 다른 속성이다. 아래는 공식 문서의 예제 코드를 일관성을 위해 <code>message</code>를 활용한 예제로 변경한 것이다.</p>
-<div>
+<div class="gist-embed">
     <div id="gist101581234" class="gist">
-    <div class="gist-file">
+    <div class="gist-file" translate="no">
       <div class="gist-data">
         <div class="js-gist-file-update-container js-task-list-container file-box">
-  <div id="file-vue-watch-example-vue" class="file">
+  <div id="file-vue-watch-example-vue" class="file my-2">
     
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-vue  ">
 
-  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-vue ">
-      
-<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip>
-      <tr>
-        <td id="file-vue-watch-example-vue-L1" class="blob-num js-line-number" data-line-number="1"></td>
-        <td id="file-vue-watch-example-vue-LC1" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">template</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L2" class="blob-num js-line-number" data-line-number="2"></td>
-        <td id="file-vue-watch-example-vue-LC2" class="blob-code blob-code-inner js-file-line">  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>example<span class="pl-pds">&quot;</span></span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L3" class="blob-num js-line-number" data-line-number="3"></td>
-        <td id="file-vue-watch-example-vue-LC3" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;원본 메시지: &quot;{{ message }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L4" class="blob-num js-line-number" data-line-number="4"></td>
-        <td id="file-vue-watch-example-vue-LC4" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;역순으로 표시한 메시지: &quot;{{ reversedMessage }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L5" class="blob-num js-line-number" data-line-number="5"></td>
-        <td id="file-vue-watch-example-vue-LC5" class="blob-code blob-code-inner js-file-line">  &lt;/<span class="pl-ent">div</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L6" class="blob-num js-line-number" data-line-number="6"></td>
-        <td id="file-vue-watch-example-vue-LC6" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">template</span>&gt;</td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L7" class="blob-num js-line-number" data-line-number="7"></td>
-        <td id="file-vue-watch-example-vue-LC7" class="blob-code blob-code-inner js-file-line">
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table data-hpc class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Vue" data-tagsearch-path="vue-watch-example.vue">
+        <tr>
+          <td id="file-vue-watch-example-vue-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-vue-watch-example-vue-LC1" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">template</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-vue-watch-example-vue-LC2" class="blob-code blob-code-inner js-file-line">  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>example<span class="pl-pds">&quot;</span></span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-vue-watch-example-vue-LC3" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;원본 메시지: &quot;{{ message }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-vue-watch-example-vue-LC4" class="blob-code blob-code-inner js-file-line">    &lt;<span class="pl-ent">p</span>&gt;역순으로 표시한 메시지: &quot;{{ reversedMessage }}&quot;&lt;/<span class="pl-ent">p</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-vue-watch-example-vue-LC5" class="blob-code blob-code-inner js-file-line">  &lt;/<span class="pl-ent">div</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-vue-watch-example-vue-LC6" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">template</span>&gt;</td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-vue-watch-example-vue-LC7" class="blob-code blob-code-inner js-file-line">
 </td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L8" class="blob-num js-line-number" data-line-number="8"></td>
-        <td id="file-vue-watch-example-vue-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L9" class="blob-num js-line-number" data-line-number="9"></td>
-        <td id="file-vue-watch-example-vue-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"><span class="pl-k">export</span> <span class="pl-c1">default</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L10" class="blob-num js-line-number" data-line-number="10"></td>
-        <td id="file-vue-watch-example-vue-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>vue-watch-example<span class="pl-pds">&#39;</span></span>,</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L11" class="blob-num js-line-number" data-line-number="11"></td>
-        <td id="file-vue-watch-example-vue-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  <span class="pl-en">data</span>(){</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L12" class="blob-num js-line-number" data-line-number="12"></td>
-        <td id="file-vue-watch-example-vue-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-k">return</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L13" class="blob-num js-line-number" data-line-number="13"></td>
-        <td id="file-vue-watch-example-vue-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      message<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>안녕하세요<span class="pl-pds">&#39;</span></span>,</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L14" class="blob-num js-line-number" data-line-number="14"></td>
-        <td id="file-vue-watch-example-vue-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      reversedMessage<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span></span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L15" class="blob-num js-line-number" data-line-number="15"></td>
-        <td id="file-vue-watch-example-vue-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L16" class="blob-num js-line-number" data-line-number="16"></td>
-        <td id="file-vue-watch-example-vue-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  },</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L17" class="blob-num js-line-number" data-line-number="17"></td>
-        <td id="file-vue-watch-example-vue-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  watch<span class="pl-k">:</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L18" class="blob-num js-line-number" data-line-number="18"></td>
-        <td id="file-vue-watch-example-vue-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-c"><span class="pl-c">//</span> Callback으로 지정된 handler 함수를 실행</span></span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L19" class="blob-num js-line-number" data-line-number="19"></td>
-        <td id="file-vue-watch-example-vue-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    message<span class="pl-k">:</span> {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L20" class="blob-num js-line-number" data-line-number="20"></td>
-        <td id="file-vue-watch-example-vue-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      <span class="pl-en">handler</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">newVal</span>, <span class="pl-smi">oldVal</span>) {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L21" class="blob-num js-line-number" data-line-number="21"></td>
-        <td id="file-vue-watch-example-vue-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-k">if</span> (newVal <span class="pl-k">&amp;&amp;</span> newVal <span class="pl-k">!==</span> oldVal) {</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L22" class="blob-num js-line-number" data-line-number="22"></td>
-        <td id="file-vue-watch-example-vue-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">          <span class="pl-c1">this</span>.<span class="pl-smi">reversedMessage</span> <span class="pl-k">=</span> <span class="pl-smi">newVal</span>.<span class="pl-c1">split</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>).<span class="pl-c1">reverse</span>().<span class="pl-c1">join</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>)</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L23" class="blob-num js-line-number" data-line-number="23"></td>
-        <td id="file-vue-watch-example-vue-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L24" class="blob-num js-line-number" data-line-number="24"></td>
-        <td id="file-vue-watch-example-vue-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      },</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L25" class="blob-num js-line-number" data-line-number="25"></td>
-        <td id="file-vue-watch-example-vue-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      immediate<span class="pl-k">:</span> <span class="pl-c1">true</span>,</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L26" class="blob-num js-line-number" data-line-number="26"></td>
-        <td id="file-vue-watch-example-vue-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      deep<span class="pl-k">:</span> <span class="pl-c1">true</span></span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L27" class="blob-num js-line-number" data-line-number="27"></td>
-        <td id="file-vue-watch-example-vue-LC27" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L28" class="blob-num js-line-number" data-line-number="28"></td>
-        <td id="file-vue-watch-example-vue-LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  }</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L29" class="blob-num js-line-number" data-line-number="29"></td>
-        <td id="file-vue-watch-example-vue-LC29" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">}</span></td>
-      </tr>
-      <tr>
-        <td id="file-vue-watch-example-vue-L30" class="blob-num js-line-number" data-line-number="30"></td>
-        <td id="file-vue-watch-example-vue-LC30" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></td>
-      </tr>
-</table>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-vue-watch-example-vue-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-vue-watch-example-vue-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-s1"><span class="pl-k">export</span> <span class="pl-c1">default</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-vue-watch-example-vue-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>vue-watch-example<span class="pl-pds">&#39;</span></span>,</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-vue-watch-example-vue-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  <span class="pl-en">data</span>(){</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-vue-watch-example-vue-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-k">return</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-vue-watch-example-vue-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      message<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span>안녕하세요<span class="pl-pds">&#39;</span></span>,</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-vue-watch-example-vue-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      reversedMessage<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span></span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-vue-watch-example-vue-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-vue-watch-example-vue-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  },</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-vue-watch-example-vue-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  watch<span class="pl-k">:</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-vue-watch-example-vue-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    <span class="pl-c"><span class="pl-c">//</span> Callback으로 지정된 handler 함수를 실행</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-vue-watch-example-vue-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    message<span class="pl-k">:</span> {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-vue-watch-example-vue-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      <span class="pl-en">handler</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">newVal</span>, <span class="pl-smi">oldVal</span>) {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-vue-watch-example-vue-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        <span class="pl-k">if</span> (newVal <span class="pl-k">&amp;&amp;</span> newVal <span class="pl-k">!==</span> oldVal) {</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-vue-watch-example-vue-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">          <span class="pl-c1">this</span>.<span class="pl-smi">reversedMessage</span> <span class="pl-k">=</span> <span class="pl-smi">newVal</span>.<span class="pl-c1">split</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>).<span class="pl-c1">reverse</span>().<span class="pl-c1">join</span>(<span class="pl-s"><span class="pl-pds">&#39;</span><span class="pl-pds">&#39;</span></span>)</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-vue-watch-example-vue-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">        }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L24" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="24"></td>
+          <td id="file-vue-watch-example-vue-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      },</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L25" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="25"></td>
+          <td id="file-vue-watch-example-vue-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      immediate<span class="pl-k">:</span> <span class="pl-c1">true</span>,</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L26" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="26"></td>
+          <td id="file-vue-watch-example-vue-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">      deep<span class="pl-k">:</span> <span class="pl-c1">true</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L27" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="27"></td>
+          <td id="file-vue-watch-example-vue-LC27" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">    }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L28" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="28"></td>
+          <td id="file-vue-watch-example-vue-LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">  }</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L29" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="29"></td>
+          <td id="file-vue-watch-example-vue-LC29" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">}</span></td>
+        </tr>
+        <tr>
+          <td id="file-vue-watch-example-vue-L30" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="30"></td>
+          <td id="file-vue-watch-example-vue-LC30" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></td>
+        </tr>
+  </table>
+</div>
 
 
-  </div>
+    </div>
 
   </div>
 </div>
@@ -315,7 +369,9 @@
       </div>
       <div class="gist-meta">
         <a href="https://gist.github.com/perade/85b643e0153ae5bba53ddd9d27cc6e32/raw/eeae1f24c51362147998fee5fecb1253e69db597/vue-watch-example.vue" style="float:right">view raw</a>
-        <a href="https://gist.github.com/perade/85b643e0153ae5bba53ddd9d27cc6e32#file-vue-watch-example-vue">vue-watch-example.vue</a>
+        <a href="https://gist.github.com/perade/85b643e0153ae5bba53ddd9d27cc6e32#file-vue-watch-example-vue">
+          vue-watch-example.vue
+        </a>
         hosted with &#10084; by <a href="https://github.com">GitHub</a>
       </div>
     </div>
@@ -334,7 +390,7 @@
 </div><div class="post__footer"><div class="post-tags"><a href="/blog/tag/Vue.js/" class="post-tags__link"><span>#</span> Vue.js
 		</a></div></div></div><div class="post-comments"></div><div class="author post-author"><img alt="Author image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3cfilter id='__svg-blur-362d9c1c939202a0ae435179fe4721d8'%3e%3cfeGaussianBlur in='SourceGraphic' stdDeviation='5'/%3e%3c/filter%3e%3c/defs%3e%3cimage x='0' y='0' filter='url(%23__svg-blur-362d9c1c939202a0ae435179fe4721d8)' width='180' height='180' xlink:href='data:image/jpeg%3bbase64%2c/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABAAEADASIAAhEBAxEB/8QAGQABAQEBAQEAAAAAAAAAAAAAAAgHAQMG/8QAKhAAAQMEAQQBAgcAAAAAAAAAAQACAwQFETEGBxIhQQgicRMVMkJRYZH/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARECEv/aAAwDAQACEQMRAD8AqkaCINBEBERARcBB0QfsuoCHSIdIA0EQaCIBUW9UeXXbnPMakQPqn0ENQ%2bnoaSIntHZnJ7Rt5ALifQwPStIrErTwd1l5TbnUEMEE1Jc6uvnEhBc6KZrfMQ/c3DSwDwWqW41zNqdeI8wunErrHcrNWyxuYe%2bSHvJjnYPJa9uiCPex6Ku%2b21QrrfS1bWOY2eJsoa7YDgDg/wCrCOV9NqC83GWGnoIIaCsayaihiYI6mOV8jXTANd5ZGQHE58DPgA73ulYY6aJjgwOawAhn6Rgev6SXTrnzceiHSIdKsg0EQaCICnb5S8tuFFdbHx23yPpopWCtmmj8PdiTtY0O2AC0k4349KiVifXXhlXyTmHFquWMussDJoZnQOxMJHDuYAMHwS1oz91KsfE/Hbmt2d1Iq7JcaiWtgukclR3zHueyVrQ4u7t4IyCNZxj3molgXSvgFXx3q1LWUUcn5ZBbXU9VJUH6vxy/GGDHkfQDn%2bDsrfUhRDpEOlUBoIg0EQEREBERAQ6RDpB//9k=' /%3e%3c/svg%3e" width="180" data-src="/blog/assets/static/Author.e6b6009.39aeb0a44dc2f89f98aa5fff2d37c6fb.jpg" data-srcset="/blog/assets/static/Author.e6b6009.39aeb0a44dc2f89f98aa5fff2d37c6fb.jpg 180w" data-sizes="(max-width: 180px) 100vw, 180px" class="author__image g-image g-image--lazy g-image--loading"><noscript><img src="/blog/assets/static/Author.e6b6009.39aeb0a44dc2f89f98aa5fff2d37c6fb.jpg" class="author__image g-image g-image--loaded" width="180" alt="Author image"></noscript><!----><p class="author__intro">
 		Slowly, but steadily
-	</p><p class="author__links"></p></div></main><footer class="footer"><span class="footer__copyright">Copyright © 2020. </span><span class="footer__links">Powered by <a href="//gridsome.org"> Gridsome </a></span></footer></div>
-    <script>window.__INITIAL_STATE__={"data":{"post":{"title":"[Vue.js] computed vs watch - computed와 watch의 차이점","path":"\u002Fvue-computed-vs-watch\u002F","date":"17 February 2020","timeToRead":2,"hasImage":false,"tags":[{"id":"Vue.js","title":"Vue.js","path":"\u002Ftag\u002FVue.js\u002F"}],"description":"Vue.js에서 데이터 변경에 반응하여 후속 동작을 취해야 할 때 computed와 watch 속성을 흔히 사용한다. 언뜻 비슷해 보이는 두 속성의 차이점은 무엇인지, 상황 별로 어느 것을 사용해야 적합한지 알아본다.","content":"\u003Cp\u003EVue.js를 처음 학습할 때 가장 헷갈렸던 것중 하나가 computed와 watch를 선택해서 사용해야 하는 상황이었다. 언뜻 보면 비슷한 동작을 하는 것 같은데 차이가 있을테니 두 개가 있을 것이고, 이름도 뭔가 계산된거 같은 이름과 지켜보는 듯한 이름으로 차이가 있다. 공식 문서에 두 속성에 대한 개념과 차이점이 잘 정리되어 있지만 되새기는 차원에서 글을 작성해 본다.\u003C\u002Fp\u003E\n\u003Chr\u003E\n\u003Ch1 id=\"computed\"\u003E\u003Ca href=\"#computed\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003Ecomputed\u003C\u002Fh1\u003E\n\u003Cp\u003Ecomputed는 데이터의 변경에 반응하여 특정 값을 반환해주는 일종의 \u003Cstrong\u003Egetter 함수\u003C\u002Fstrong\u003E이다. 아래는 공식 문서의 예제 코드이다.\u003C\u002Fp\u003E\n\u003Cdiv\u003E\n    \u003Cdiv id=\"gist101580685\" class=\"gist\"\u003E\n    \u003Cdiv class=\"gist-file\"\u003E\n      \u003Cdiv class=\"gist-data\"\u003E\n        \u003Cdiv class=\"js-gist-file-update-container js-task-list-container file-box\"\u003E\n  \u003Cdiv id=\"file-vue-computed-example-vue\" class=\"file\"\u003E\n    \n\n  \u003Cdiv itemprop=\"text\" class=\"Box-body p-0 blob-wrapper data type-vue \"\u003E\n      \n\u003Ctable class=\"highlight tab-size js-file-line-container\" data-tab-size=\"8\" data-paste-markdown-skip\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L1\" class=\"blob-num js-line-number\" data-line-number=\"1\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC1\" class=\"blob-code blob-code-inner js-file-line\"\u003E&lt;\u003Cspan class=\"pl-ent\"\u003Etemplate\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L2\" class=\"blob-num js-line-number\" data-line-number=\"2\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC2\" class=\"blob-code blob-code-inner js-file-line\"\u003E  &lt;\u003Cspan class=\"pl-ent\"\u003Ediv\u003C\u002Fspan\u003E \u003Cspan class=\"pl-e\"\u003Eid\u003C\u002Fspan\u003E=\u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&quot;\u003C\u002Fspan\u003Eexample\u003Cspan class=\"pl-pds\"\u003E&quot;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L3\" class=\"blob-num js-line-number\" data-line-number=\"3\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC3\" class=\"blob-code blob-code-inner js-file-line\"\u003E    &lt;\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;원본 메시지: &quot;{{ message }}&quot;&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L4\" class=\"blob-num js-line-number\" data-line-number=\"4\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC4\" class=\"blob-code blob-code-inner js-file-line\"\u003E    &lt;\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;역순으로 표시한 메시지: &quot;{{ reversedMessage }}&quot;&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L5\" class=\"blob-num js-line-number\" data-line-number=\"5\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC5\" class=\"blob-code blob-code-inner js-file-line\"\u003E  &lt;\u002F\u003Cspan class=\"pl-ent\"\u003Ediv\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L6\" class=\"blob-num js-line-number\" data-line-number=\"6\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC6\" class=\"blob-code blob-code-inner js-file-line\"\u003E&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Etemplate\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L7\" class=\"blob-num js-line-number\" data-line-number=\"7\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC7\" class=\"blob-code blob-code-inner js-file-line\"\u003E\n\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L8\" class=\"blob-num js-line-number\" data-line-number=\"8\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC8\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E&lt;\u003Cspan class=\"pl-ent\"\u003Escript\u003C\u002Fspan\u003E&gt;\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L9\" class=\"blob-num js-line-number\" data-line-number=\"9\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC9\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E\u003Cspan class=\"pl-k\"\u003Eexport\u003C\u002Fspan\u003E \u003Cspan class=\"pl-c1\"\u003Edefault\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L10\" class=\"blob-num js-line-number\" data-line-number=\"10\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC10\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  name\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003Evue-computed-example\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E,\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L11\" class=\"blob-num js-line-number\" data-line-number=\"11\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC11\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  \u003Cspan class=\"pl-en\"\u003Edata\u003C\u002Fspan\u003E(){\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L12\" class=\"blob-num js-line-number\" data-line-number=\"12\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC12\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    \u003Cspan class=\"pl-k\"\u003Ereturn\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L13\" class=\"blob-num js-line-number\" data-line-number=\"13\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC13\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      message\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E안녕하세요\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L14\" class=\"blob-num js-line-number\" data-line-number=\"14\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC14\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L15\" class=\"blob-num js-line-number\" data-line-number=\"15\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC15\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  },\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L16\" class=\"blob-num js-line-number\" data-line-number=\"16\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC16\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  computed\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L17\" class=\"blob-num js-line-number\" data-line-number=\"17\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC17\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    \u003Cspan class=\"pl-c\"\u003E\u003Cspan class=\"pl-c\"\u003E\u002F\u002F\u003C\u002Fspan\u003E 계산된 getter\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L18\" class=\"blob-num js-line-number\" data-line-number=\"18\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC18\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    \u003Cspan class=\"pl-en\"\u003EreversedMessage\u003C\u002Fspan\u003E\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-k\"\u003Efunction\u003C\u002Fspan\u003E () {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L19\" class=\"blob-num js-line-number\" data-line-number=\"19\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC19\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      \u003Cspan class=\"pl-k\"\u003Ereturn\u003C\u002Fspan\u003E \u003Cspan class=\"pl-c1\"\u003Ethis\u003C\u002Fspan\u003E.\u003Cspan class=\"pl-smi\"\u003Emessage\u003C\u002Fspan\u003E.\u003Cspan class=\"pl-c1\"\u003Esplit\u003C\u002Fspan\u003E(\u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E).\u003Cspan class=\"pl-c1\"\u003Ereverse\u003C\u002Fspan\u003E().\u003Cspan class=\"pl-c1\"\u003Ejoin\u003C\u002Fspan\u003E(\u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E)\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L20\" class=\"blob-num js-line-number\" data-line-number=\"20\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC20\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L21\" class=\"blob-num js-line-number\" data-line-number=\"21\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC21\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L22\" class=\"blob-num js-line-number\" data-line-number=\"22\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC22\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E}\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-L23\" class=\"blob-num js-line-number\" data-line-number=\"23\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-computed-example-vue-LC23\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Escript\u003C\u002Fspan\u003E&gt;\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n\u003C\u002Ftable\u003E\n\n\n  \u003C\u002Fdiv\u003E\n\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"gist-meta\"\u003E\n        \u003Ca href=\"https:\u002F\u002Fgist.github.com\u002Fperade\u002Fcc8d98bddb8e4f96ba3878ce9d347b5f\u002Fraw\u002F0945d48faf45be7b1b573f863222f948135fb266\u002Fvue-computed-example.vue\" style=\"float:right\"\u003Eview raw\u003C\u002Fa\u003E\n        \u003Ca href=\"https:\u002F\u002Fgist.github.com\u002Fperade\u002Fcc8d98bddb8e4f96ba3878ce9d347b5f#file-vue-computed-example-vue\"\u003Evue-computed-example.vue\u003C\u002Fa\u003E\n        hosted with &#10084; by \u003Ca href=\"https:\u002F\u002Fgithub.com\"\u003EGitHub\u003C\u002Fa\u003E\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n\u003Cp\u003E예제를 실행해보면 \u003Ccode\u003Emessage\u003C\u002Fcode\u003E의 값에 따라 \u003Ccode\u003EreversedMessage\u003C\u002Fcode\u003E가 반환하는 값이 변경됨을 알 수 있다. \u003Ccode\u003EreversedMessage\u003C\u002Fcode\u003E라는 \u003Cstrong\u003Egetter 함수\u003C\u002Fstrong\u003E가 \u003Ccode\u003Emessage\u003C\u002Fcode\u003E에 의존성을 가지고 있기 때문인데, 이것이 바로 computed 속성의 특징이다.\u003C\u002Fp\u003E\n\u003Cp\u003E또한 computed의 장점중 하나는 의존성을 가진 데이터가 변경되지 않으면 getter 호출 시 내부 로직 연산을 다시 하지 않고, 이미 계산되어 있는 결과를 즉시 반환한다는 점이다. 이는 \u003Ca href=\"https:\u002F\u002Fkr.vuejs.org\u002Fv2\u002Fguide\u002Freactivity.html#%EB%B3%80%EA%B2%BD-%EB%82%B4%EC%9A%A9%EC%9D%84-%EC%B6%94%EC%A0%81%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003EVue가 데이터를 추적하기 위해 사용하는 방식\u003C\u002Fa\u003E 덕분인데, 연산이 부담스러운 데이터 같은 경우 이러한 특성을 잘 활용하면 불필요한 연산을 줄일 수 있다. 매번 연산이 필요할 경우엔 method를 활용하면 된다.\u003C\u002Fp\u003E\n\u003Chr\u003E\n\u003Ch1 id=\"watch\"\u003E\u003Ca href=\"#watch\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003Ewatch\u003C\u002Fh1\u003E\n\u003Cp\u003Ewatch는 computed와 비슷하지만 \u003Cstrong\u003E특정 데이터가 변경되었을 때 지정한 Callback 함수를 실행\u003C\u002Fstrong\u003E하는, 즉 사용 목적이 다른 속성이다. 아래는 공식 문서의 예제 코드를 일관성을 위해 \u003Ccode\u003Emessage\u003C\u002Fcode\u003E를 활용한 예제로 변경한 것이다.\u003C\u002Fp\u003E\n\u003Cdiv\u003E\n    \u003Cdiv id=\"gist101581234\" class=\"gist\"\u003E\n    \u003Cdiv class=\"gist-file\"\u003E\n      \u003Cdiv class=\"gist-data\"\u003E\n        \u003Cdiv class=\"js-gist-file-update-container js-task-list-container file-box\"\u003E\n  \u003Cdiv id=\"file-vue-watch-example-vue\" class=\"file\"\u003E\n    \n\n  \u003Cdiv itemprop=\"text\" class=\"Box-body p-0 blob-wrapper data type-vue \"\u003E\n      \n\u003Ctable class=\"highlight tab-size js-file-line-container\" data-tab-size=\"8\" data-paste-markdown-skip\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L1\" class=\"blob-num js-line-number\" data-line-number=\"1\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC1\" class=\"blob-code blob-code-inner js-file-line\"\u003E&lt;\u003Cspan class=\"pl-ent\"\u003Etemplate\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L2\" class=\"blob-num js-line-number\" data-line-number=\"2\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC2\" class=\"blob-code blob-code-inner js-file-line\"\u003E  &lt;\u003Cspan class=\"pl-ent\"\u003Ediv\u003C\u002Fspan\u003E \u003Cspan class=\"pl-e\"\u003Eid\u003C\u002Fspan\u003E=\u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&quot;\u003C\u002Fspan\u003Eexample\u003Cspan class=\"pl-pds\"\u003E&quot;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L3\" class=\"blob-num js-line-number\" data-line-number=\"3\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC3\" class=\"blob-code blob-code-inner js-file-line\"\u003E    &lt;\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;원본 메시지: &quot;{{ message }}&quot;&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L4\" class=\"blob-num js-line-number\" data-line-number=\"4\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC4\" class=\"blob-code blob-code-inner js-file-line\"\u003E    &lt;\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;역순으로 표시한 메시지: &quot;{{ reversedMessage }}&quot;&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Ep\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L5\" class=\"blob-num js-line-number\" data-line-number=\"5\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC5\" class=\"blob-code blob-code-inner js-file-line\"\u003E  &lt;\u002F\u003Cspan class=\"pl-ent\"\u003Ediv\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L6\" class=\"blob-num js-line-number\" data-line-number=\"6\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC6\" class=\"blob-code blob-code-inner js-file-line\"\u003E&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Etemplate\u003C\u002Fspan\u003E&gt;\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L7\" class=\"blob-num js-line-number\" data-line-number=\"7\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC7\" class=\"blob-code blob-code-inner js-file-line\"\u003E\n\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L8\" class=\"blob-num js-line-number\" data-line-number=\"8\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC8\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E&lt;\u003Cspan class=\"pl-ent\"\u003Escript\u003C\u002Fspan\u003E&gt;\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L9\" class=\"blob-num js-line-number\" data-line-number=\"9\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC9\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E\u003Cspan class=\"pl-k\"\u003Eexport\u003C\u002Fspan\u003E \u003Cspan class=\"pl-c1\"\u003Edefault\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L10\" class=\"blob-num js-line-number\" data-line-number=\"10\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC10\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  name\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003Evue-watch-example\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E,\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L11\" class=\"blob-num js-line-number\" data-line-number=\"11\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC11\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  \u003Cspan class=\"pl-en\"\u003Edata\u003C\u002Fspan\u003E(){\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L12\" class=\"blob-num js-line-number\" data-line-number=\"12\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC12\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    \u003Cspan class=\"pl-k\"\u003Ereturn\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L13\" class=\"blob-num js-line-number\" data-line-number=\"13\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC13\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      message\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E안녕하세요\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E,\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L14\" class=\"blob-num js-line-number\" data-line-number=\"14\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC14\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      reversedMessage\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L15\" class=\"blob-num js-line-number\" data-line-number=\"15\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC15\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L16\" class=\"blob-num js-line-number\" data-line-number=\"16\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC16\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  },\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L17\" class=\"blob-num js-line-number\" data-line-number=\"17\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC17\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  watch\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L18\" class=\"blob-num js-line-number\" data-line-number=\"18\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC18\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    \u003Cspan class=\"pl-c\"\u003E\u003Cspan class=\"pl-c\"\u003E\u002F\u002F\u003C\u002Fspan\u003E Callback으로 지정된 handler 함수를 실행\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L19\" class=\"blob-num js-line-number\" data-line-number=\"19\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC19\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    message\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L20\" class=\"blob-num js-line-number\" data-line-number=\"20\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC20\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      \u003Cspan class=\"pl-en\"\u003Ehandler\u003C\u002Fspan\u003E\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-k\"\u003Efunction\u003C\u002Fspan\u003E (\u003Cspan class=\"pl-smi\"\u003EnewVal\u003C\u002Fspan\u003E, \u003Cspan class=\"pl-smi\"\u003EoldVal\u003C\u002Fspan\u003E) {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L21\" class=\"blob-num js-line-number\" data-line-number=\"21\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC21\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E        \u003Cspan class=\"pl-k\"\u003Eif\u003C\u002Fspan\u003E (newVal \u003Cspan class=\"pl-k\"\u003E&amp;&amp;\u003C\u002Fspan\u003E newVal \u003Cspan class=\"pl-k\"\u003E!==\u003C\u002Fspan\u003E oldVal) {\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L22\" class=\"blob-num js-line-number\" data-line-number=\"22\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC22\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E          \u003Cspan class=\"pl-c1\"\u003Ethis\u003C\u002Fspan\u003E.\u003Cspan class=\"pl-smi\"\u003EreversedMessage\u003C\u002Fspan\u003E \u003Cspan class=\"pl-k\"\u003E=\u003C\u002Fspan\u003E \u003Cspan class=\"pl-smi\"\u003EnewVal\u003C\u002Fspan\u003E.\u003Cspan class=\"pl-c1\"\u003Esplit\u003C\u002Fspan\u003E(\u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E).\u003Cspan class=\"pl-c1\"\u003Ereverse\u003C\u002Fspan\u003E().\u003Cspan class=\"pl-c1\"\u003Ejoin\u003C\u002Fspan\u003E(\u003Cspan class=\"pl-s\"\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003Cspan class=\"pl-pds\"\u003E&#39;\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E)\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L23\" class=\"blob-num js-line-number\" data-line-number=\"23\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC23\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E        }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L24\" class=\"blob-num js-line-number\" data-line-number=\"24\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC24\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      },\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L25\" class=\"blob-num js-line-number\" data-line-number=\"25\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC25\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      immediate\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-c1\"\u003Etrue\u003C\u002Fspan\u003E,\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L26\" class=\"blob-num js-line-number\" data-line-number=\"26\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC26\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E      deep\u003Cspan class=\"pl-k\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"pl-c1\"\u003Etrue\u003C\u002Fspan\u003E\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L27\" class=\"blob-num js-line-number\" data-line-number=\"27\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC27\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E    }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L28\" class=\"blob-num js-line-number\" data-line-number=\"28\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC28\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E  }\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L29\" class=\"blob-num js-line-number\" data-line-number=\"29\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC29\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E}\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n      \u003Ctr\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-L30\" class=\"blob-num js-line-number\" data-line-number=\"30\"\u003E\u003C\u002Ftd\u003E\n        \u003Ctd id=\"file-vue-watch-example-vue-LC30\" class=\"blob-code blob-code-inner js-file-line\"\u003E\u003Cspan class=\"pl-s1\"\u003E&lt;\u002F\u003Cspan class=\"pl-ent\"\u003Escript\u003C\u002Fspan\u003E&gt;\u003C\u002Fspan\u003E\u003C\u002Ftd\u003E\n      \u003C\u002Ftr\u003E\n\u003C\u002Ftable\u003E\n\n\n  \u003C\u002Fdiv\u003E\n\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"gist-meta\"\u003E\n        \u003Ca href=\"https:\u002F\u002Fgist.github.com\u002Fperade\u002F85b643e0153ae5bba53ddd9d27cc6e32\u002Fraw\u002Feeae1f24c51362147998fee5fecb1253e69db597\u002Fvue-watch-example.vue\" style=\"float:right\"\u003Eview raw\u003C\u002Fa\u003E\n        \u003Ca href=\"https:\u002F\u002Fgist.github.com\u002Fperade\u002F85b643e0153ae5bba53ddd9d27cc6e32#file-vue-watch-example-vue\"\u003Evue-watch-example.vue\u003C\u002Fa\u003E\n        hosted with &#10084; by \u003Ca href=\"https:\u002F\u002Fgithub.com\"\u003EGitHub\u003C\u002Fa\u003E\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n\u003Cp\u003E예제를 보면 결과는 computed를 사용했을 때와 동일하지만 코드가 길어지고(습관적으로 watch를 풀어서 사용한 탓도 있다.) 복잡도가 더 올라갔다. 하지만 computed 사용이 더 적합한 예제를 다뤄서 그렇지, 특정 데이터가 변경되었을 때 API 호출 등 특정 동작을 실행해야하는 상황은 watch가 더 적합하다고 Vue에서는 언급하고 있다. 물론 대부분의 경우 computed가 더 적합하다는 말도 함께 언급하고 있지만 말이다.\u003C\u002Fp\u003E\n\u003Chr\u003E\n\u003Ch1 id=\"정리\"\u003E\u003Ca href=\"#%EC%A0%95%EB%A6%AC\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003E정리\u003C\u002Fh1\u003E\n\u003Cp\u003E간단하게 computed와 watch 속성의 차이점에 대해 알아보았다. 둘 다 데이터 변경에 반응하는 특징을 갖고 있지만, 사용 목적이 다름을 인지하고 상황에 맞게 사용하려는 노력이 필요하다. 정리하자면 데이터 변경 시 특정 동작을 취해야 하는 상황은 watch, 그 외 상황은 대체로 computed가 적합하다고 할 수 있다.\u003C\u002Fp\u003E\n\u003Chr\u003E\n\u003Ch3 id=\"references\"\u003E\u003Ca href=\"#references\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EReferences\u003C\u002Fh3\u003E\n\u003Cul\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Fkr.vuejs.org\u002Fv2\u002Fguide\u002Fcomputed.html\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Fkr.vuejs.org\u002Fv2\u002Fguide\u002Fcomputed.html\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Fmedium.com\u002F@jeongwooahn\u002Fvue-js-watch%EC%99%80-computed-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%99%80-%EC%82%AC%EC%9A%A9%EB%B2%95-e2edce37ec34\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Fmedium.com\u002F@jeongwooahn\u002Fvue-js-watch%EC%99%80-computed-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%99%80-%EC%82%AC%EC%9A%A9%EB%B2%95-e2edce37ec34\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n"}},"context":{}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script><script src="/blog/assets/js/app.e677d8b5.js" defer></script><script src="/blog/assets/js/page--src-templates-post-vue.107e5aaa.js" defer></script>
+	</p><p class="author__links"></p></div></main><footer class="footer"><span class="footer__copyright">Copyright © 2023. </span><span class="footer__links">Powered by <a href="//gridsome.org"> Gridsome </a></span></footer></div>
+    <script src="/blog/assets/js/app.11cf6a80.js" defer></script><script src="/blog/assets/js/page--src-templates-post-vue.1ab9b8d0.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>toFixed 반올림 오류 | perade</title><meta name="gridsome:hash" content="843e47f385d56c2b19388c4509fc534a1d06489c"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.21"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="toFixed 사용 시 간혹 발생하는 반올림 오류 현상을 확인하고, 간단한 해결책을 알아본다."><meta data-vue-tag="ssr" property="og:type" content="article"><meta data-vue-tag="ssr" property="og:title" content="toFixed 반올림 오류"><meta data-vue-tag="ssr" property="og:description" content="toFixed 사용 시 간혹 발생하는 반올림 오류 현상을 확인하고, 간단한 해결책을 알아본다."><meta data-vue-tag="ssr" property="og:url" content="https://perade.github.io/blog/js-to-fixed-problem/"><meta data-vue-tag="ssr" property="og:image" content="https://perade.github.io/blog/images/Author.jpg"><meta data-vue-tag="ssr" property="article:published_time" content="2020-08-21"><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/blog/assets/static/favicon.ce0531f.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/blog/assets/static/favicon.ac8d93a.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="96x96" href="/blog/assets/static/favicon.b9532cc.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="76x76" href="/blog/assets/static/favicon.f22e9f3.02c7a28478250793f4f56eb605c74a33.png"><link data-vue-tag="ssr" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;display=swap&amp;subset=korean"><link rel="preload" href="/blog/assets/css/0.styles.d9a4cdc1.css" as="style"><link rel="preload" href="/blog/assets/js/app.11cf6a80.js" as="script"><link rel="preload" href="/blog/assets/js/page--src-templates-post-vue.1ab9b8d0.js" as="script"><link rel="prefetch" href="/blog/assets/js/page--node-modules-gridsome-app-pages-404-vue.78d9cc21.js"><link rel="prefetch" href="/blog/assets/js/page--src-pages-index-vue.4845d9ff.js"><link rel="prefetch" href="/blog/assets/js/page--src-templates-tag-vue.b2eea100.js"><link rel="prefetch" href="/blog/assets/js/vendors~page--src-templates-post-vue.4a5f8fb0.js"><link rel="stylesheet" href="/blog/assets/css/0.styles.d9a4cdc1.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <script>
+      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      (function() {
+        window.__onThemeChange = function() {};
+        function setTheme(newTheme) {
+          window.__theme = newTheme;
+          preferredTheme = newTheme;
+          document.body.setAttribute('data-theme', newTheme);
+          window.__onThemeChange(newTheme);
+        }
+
+        var preferredTheme;
+        try {
+          preferredTheme = localStorage.getItem('theme');
+        } catch (err) { }
+
+        window.__setPreferredTheme = function(newTheme) {
+          setTheme(newTheme);
+          try {
+            localStorage.setItem('theme', newTheme);
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addListener(function(e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        });
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+      })();
+    </script>
+
+    <div id="app" data-server-rendered="true"><header class="header"><div class="header__left"><a href="/blog/" class="logo active"><span class="logo__text">
+    ← Home
+  </span></a></div><div class="header__right"><div class="toggle"><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><img alt="Github image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 22 22' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cimage x='0' y='0' width='22' height='22' xlink:href='data:image/png%3bbase64%2ciVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAALmElEQVR42s1be8wcVRXf3e9TKWBBmXv3%2b5SPR0UtMbExxL%2bqWFAQEaqQpqDhD4iIJmIUMRpoo2CU8IjG%2bIhWbQKGBoIBeRQSY2nByCPQ%2bIomEqFAFCtB%2b%2bDdfcz6OzPn3Dn3fndnZ7/9%2bu1ucjKzM3PvnHPuOeee19RqI/yaiak1DYHN/xtbB0w1E1v3nsN1m5hZwAdx/inAF/HMBhy/yXAl4AuA86wxq3Fsypx6Dprbmnxuui%2bw5D96qU1sRrxDLrFTPnPsCbh%2bMWAzGPVXHF8CA7o49mZsMwp0D0DPvAj4M%2bbYhDEX4vz44P1TTccI4/BZMuLDFVf3LJC%2bBMftgJcDwjSBbSDcahIYAkPHNt9zz6rxxJDf4PmLcHyLkkDFiCWQBkV4DaLqCMcqHY9r3wX8J0OaCcD1tiIsBdFpdjQmOypi3XWMkXtdHtvOmGEcM/4F%2bA7g7Z5EJMbDcVF/lnSdX4BzrLpp8MuOxPl1JN5qpYGw6VgmOrvGhAeSUAbueWYKzdVxzMjftQfXr8LxMFaFxkGRhly/HHe1uJ8P%2bKdPuCJ6OIIrMaOZS0c3YMSTgLVaGtyijcoEPQHOp/m4HHCzEvOW0t10EQkvZwbeaXMbIvc2AQ5haZjSO9XI%2bk7Ghi37ewFPEOdBeIdgiQgvUZFMNbosDX8CvDMiraMTD2LPxP9XGIFWIOpLSTyDZ0jp2CJDSbYBi3RyhrOWhKpM8IhnLmLC9e7FSa5/4yM8KgmpWhixRx8b2iaIZ6cH4niuIr4zQcQHjDCpXiDeOU7zmDBod1CrL8SfrAycJr7H%2b3WHocv/DyZzQpHnrTGzQ27L5CNLqXkVx/d5NPUzikI8CGmw/hwLbr6gRKoX03vWO1kF8gEWeyvUDJctMFXbYE8xX79TcH4WYJjGRtQeuJVP3BG%2bvfk9W/tWH30jC/wwub04PqMR0kiy9%2bePT9jrA7NYVHNPsPACfQZm1007eMcuwDbA4/78hXEk3Pn5%2b3hRHY2K%2bOKiLUT/WzywFUG%2by8TvUqpyOOBUm%2b/F%2b4qVyXx%2bWbWWjB0AXY4R2rk3qQhP7H9x/kMARZWH8mK9GYQ9r%2bIMj4nkjvNCXu6rAtsDpfcNvvH%2bYgXmrUi2uvmEdrN2kJQ0zQHx71t%2bLghqBMlXgdB%2brOxevG8v/u8HvKZFW4/le9cCZsKokI%2b3Zzg53fdUQZhO9mDlPFXILGOSBTcy6Q7mWDuix/l%2bmyP1eUGCQ%2bOG53wkZhWuP4hruzH3bRz3fxrntHrv4pj/SIYZvG8lG90LAFcTUcDr%2bSwKZMRV4NPgbU2s%2bxW5hJhWBF%2b3aDjeyVJf90Jo5%2bkZs56NWiem8xyxyW7w8UBtVIjsOSDLR3DFl8dzAP5uBRwuYALbEXzFNogkfFTj7SEOru7UW54yYMWExbUPFxJgVGLCeCrFDK4DkWkmAquX5RHq%2bb5sJK9AzzT4mWmKOpUD09DOjAJh/jmssl3nD8SkIF/c7WL7MglQk3xSEQ/ORbawYiui/2eEPnfobDCS9czBSuxAl7TYjYzMUw/mChw3wd2cL5Jr41sv7zKMe2JO4fGNbHV4i7hPiVHfPVltLRfmq5Kt2FjSciBAItTL1K7V1/egXYmfu8WTUnBwJVvaMMjolRiULUWCZFwMMCIJW0kCbOLZrtjiifTuAZ1zerKvKsuflnpkbhs0P3dO05gYYAu1us3fBk2UBs4utdmnuFhPtn3G9/f7gdz/IyZ4kxjP2ph%2balc4AvCPZhUaICW8gHeK%2bM%2byI1IWyGhXlf5/KHBExiIBAQ5nSxRoy9WY1cDsJsbRwLUqoCgxIKaT637OOQqaxDLbMTBAb4mWCzG4tqOCJKdKGtbQoI1iQcu2EJqUJz973KtfMEFiGHHk%2bjpEvT7e7KU0aMuA7S%2b1xd7/HLmwqihSG/ePJUB8%2bxWAvbzXlwVeYsg30aBHtANUOgBxgvIaa5PCgDyWcaH8HwaoASJacefNDprgmcKN7CsyzABzcywCnISfiknureDQsUdon6QBL0WyKtp70gz4kbxsElY/qFdyJmugSmtDuL%2bmHJx0kATg%2bBMpPEj4PBkMMNoO3DoEA9JahdxdWiQ3zC9jAdCESIGowD0VGOBorlVIYGoJ2Mr77cSogAqNRQIeYlw7VSXg5QpSID7AYzqdNBG7QOKF34fi/9%2bbFZ0hqPGLNU4b98LmhLj7mKWojp4oP0AlTCh1xs0UZfToe08RB6v4Aani6CmhKzwB4u8yQxU9QaFlRxVP0HOGwLDrJ8UVnh8QmZ8NRYuxP6XBGytkUzTXqCFhmU5KjCcadDlICYnfShnooD4QC%2booQerFAmsr1vSUQ2Qv8ZomVAvNUjdq2aJx4%2bsVxF/adeT/GuLkTIV8QGg8KCg6KiwyLIUkBF1qoobHFkFQqfHTBn23S7vj5H5VDxi0d7ItMHfNy86qGP1gES5p98L3z975AOPfrrSl51L8az355RHxSVUtoBvolRiRG3UPkU6PNRepcbFpVENm4moIonq0E90RGL7%2bSR3KFElO0NjP6JesBJGvxVrUgglcNZcqRDzRNiB4XFDBaYifoBouhrbuNu9HlPB7SrvguH4i/j/Kdcp2NOPTX/z3UA3TSyziZVs9TvoND1Tf2xPYglRVW/Zh/JWWkyUKSVqlaakfVi6M8N4eizlw7Rgw9ZoijV%2bJ%2bF4spZ/ZL2VI1gaVIcmabLb5ip7ARcunAoOo6/bkKf4CCJ6JMbOhGlRRi0j1ZxpMBNF2HSEORu5VleZOReJTv6pl1vACNRTXDTU87%2bQcQCew%2bNJrczq1nFCVNdC7sHmRgGr5D2Dem8CMr%2bD8DYMkwBYScDgz%2b1Yg/mjWiWpUiT2vX1TsTTRen4DUBr2MlmoaWMe63on409fwwHW4vz5rlsw9w7ZKnnRZH93KzDZn6Pg1EblmSR6BHStxbK7nsS4rzU3WXWWf0mp9RV5N83SvhU6iKVXV3TZ/dU2Xid3A0kIi%2bTnlP7QDpFJ3LTG/C7O4FYsdpHZ/iTRopf0qPxXKeXfocl7eIVI0QYtDc5LkB4s0mSs20CSrcH0Ox29Qj4DqF%2bqo7nCCA/zSLwWttqXuLR/l2asreXflpTzJ/1GHyLtdVZiNdPjFhzgXVwU9Qjoz/Fu1WtTN8QNMuGvehxD5GOosPUlW1FZwl4P01hkLbL1TPUIum/XlMIjTNiC2DT3Yp1GKzj/Az11K4XFmGBMYu8T8Cud342VbcLyhKKIYl76u6PGJGpyo7FFFBhjdXd7iRbtnYKNk2CyFF8/xtqbtgejSvcHYz1IPEJ/fCELJNz8L8D3tIi%2bg6Hk08DhQnQGeYRScnwY%2bR2nR78%2bEZF6QsVo6wnlr1DvEdQHS07i3DMR%2bhBFfRtvZQgIljBUGvA3wekUGxIh/BXiv0vHKQENsC6PIDUjmE0F5PFVe4u1iWAYQNGzNT4qdxwUqWJa5DomnPsNTw17hSknGSKr5XG0MXbE0L5bQCt0FuII/iQPDDPkTl4GQG6Sh0S5MBVYMYEAaNG7Jswdkv9c9wnbolvm8uUmYcJpUkVT2qBNphOx5fbzcp2uHaKSw1RigV52CM8nykAe6OqxfjPbRRCEJ7wH8TeXdJZHaznyARL4OM2Iv/gcmNoftJBEV0AzwSnf%2bR1j6i5GdeG7FyMTHBiomHJZZevXNkA16dJXzsR/ENLVhG5EBOlTvqkZugh9j3BtDnR/5g8pYCorPSc%2bf1h3itmhUFCcEDMgHDyMBJTZAmKsbqJ%2bQrtX5KbpFylPyh5JiF%2bpqP6UvyL6tO8T1x45Adh%2ben5VusgXYgHc0cyObeh9R5u96AXNuLDLUpmEP9lekfqbGk4ZjuJv7Od3ljdV/XX2sMIQESPOmnXNGtQiHn%2bVQeTbIQo2m78OUomz/b4cpN38RRJ86vP8N2CCrP4w4BtHptZzB3cqxxxEB4fVFF/khSlJRRgzK8gxrgGOlcGUoRxL5/wOi3liE/omO9AAAAABJRU5ErkJggg==' /%3e%3c/svg%3e" width="22" data-src="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png" data-srcset="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png 22w" data-sizes="(max-width: 22px) 100vw, 22px" class="g-image g-image--lazy g-image--loading"><noscript><img src="/blog/assets/static/GitHub-Mark-120px-plus.b5813a3.ef7a02b69836dc8b6a732a54c4200dcb.png" class="g-image g-image--loaded" width="22" alt="Github image"></noscript></button><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div></div></header><main class="main"><div class="post-title"><h1 class="post-title__text">
+      toFixed 반올림 오류
+    </h1><div class="post-meta">
+   21 August 2020 /
+   <strong>3 min read</strong></div></div><div class="post content-box"><div class="post__content"><p>최근 사내 QA 팀에서 확인 요청이 들어온 이슈 하나가 있었다. 웹 서비스 내 각 항목 별 보유자산의 합과 실제 총 보유자산이 소수점 단위에서 조금씩 차이를 보이는 경우가 한 번씩 있다는 것이다.</p>
+<p>입사 후 해당 로직을 깊게 들여다본 적이 없었기에 이슈가 들어온 김에 찬찬히 훑어 보았는데, 계산 로직 중 <strong>toFixed</strong> 를 사용하는 부분이 있었다. 예로부터 전설처럼(?) 전해 내려오는 JavaScript의 이상 행동 중 하나로 종종 언급되는 녀석이기에 확인을 해봤더니 역시나 이놈이 실행하는 반올림에 문제가 있었다.</p>
+<p>실무 중 이런 경우를 직접 겪어본게 처음이기도 하고, 후에 비슷한 상황을 겪더라도 당황하지 않도록 toFixed의 문제는 무엇이고, 어떻게 해결할 수 있는지 정리해보고자 한다.</p>
+<hr>
+<h1 id="무엇이-문제인가"><a href="#%EB%AC%B4%EC%97%87%EC%9D%B4-%EB%AC%B8%EC%A0%9C%EC%9D%B8%EA%B0%80" aria-hidden="true"><span class="icon icon-link"></span></a>무엇이 문제인가</h1>
+<p>아래 코드는 실제로 toFixed를 사용함으로써 문제가 발생하는 경우이다. 큰 틀에서 보자면 위의 실무에서 겪은 이슈가 이와 유사한 과정으로 발생하였다.</p>
+<div class="gist-embed">
+    <div id="gist107181232" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-example-tofixed-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table data-hpc class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="JavaScript" data-tagsearch-path="example-toFixed.js">
+        <tr>
+          <td id="file-example-tofixed-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-example-tofixed-js-LC1" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-s1>numA</span> <span class=pl-c1>=</span> <span class=pl-c1>1.2345</span><span class=pl-kos>.</span><span class=pl-en>toFixed</span><span class=pl-kos>(</span><span class=pl-c1>3</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-example-tofixed-js-LC2" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-s1>numB</span> <span class=pl-c1>=</span> <span class=pl-c1>2.2345</span><span class=pl-kos>.</span><span class=pl-en>toFixed</span><span class=pl-kos>(</span><span class=pl-c1>3</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-example-tofixed-js-LC3" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-s1>sum</span> <span class=pl-c1>=</span> <span class=pl-s1>numA</span> <span class=pl-c1>+</span> <span class=pl-s1>numB</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-example-tofixed-js-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-example-tofixed-js-LC5" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// 1.234</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-example-tofixed-js-LC6" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-s1>numA</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-example-tofixed-js-LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-example-tofixed-js-LC8" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// 2.235</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-example-tofixed-js-LC9" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-s1>numB</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-example-tofixed-js-LC10" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-example-tofixed-js-LC11" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// 3.469</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-tofixed-js-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-example-tofixed-js-LC12" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-s1>sum</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+  </table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/perade/8fdfc2889061d072e9581b52a33cd881/raw/66bc72f536fc3bad72847bdf19c9f0e1dd40c6fc/example-toFixed.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/perade/8fdfc2889061d072e9581b52a33cd881#file-example-tofixed-js">
+          example-toFixed.js
+        </a>
+        hosted with &#10084; by <a href="https://github.com">GitHub</a>
+      </div>
+    </div>
+</div>
+</div>
+<p>사용자는 소수점 3자리까지 반올림 후 이를 더한 값인 3.47을 원했으나, 1.2345.toFixed(3)이 1.235가 아닌 1.234를 반환하여 결국 3.469라는 결과를 갖게 되었다. 왜 1.2345를 반올림했는데 1.234가 나온 것일까?</p>
+<p>JavaScript의 숫자는 IEEE 754에서 정의한 스펙에 따라 그 형태에 상관없이 항상 <strong>double precision floating point, 즉 64 bit 부동 소수점</strong>으로 저장된다. 때문에 분모가 2의 거듭제곱이 아닌 수는 정확한 값이 아닌 근사치로 표현된다. 실제로 예제에서 사용한 1.2345와 2.2345를 지수 형태로 출력해 보면 아래와 같다.</p>
+<div class="gist-embed">
+    <div id="gist107181620" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-example-toexponential-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table data-hpc class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="JavaScript" data-tagsearch-path="example-toExponential.js">
+        <tr>
+          <td id="file-example-toexponential-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-example-toexponential-js-LC1" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// &quot;1.23449999999999993072e+0&quot;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-toexponential-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-example-toexponential-js-LC2" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-c1>1.2345</span><span class=pl-kos>.</span><span class=pl-en>toExponential</span><span class=pl-kos>(</span><span class=pl-c1>20</span><span class=pl-kos>)</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-toexponential-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-example-toexponential-js-LC3" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-toexponential-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-example-toexponential-js-LC4" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// &quot;2.23450000000000015277e+0&quot;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-toexponential-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-example-toexponential-js-LC5" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-c1>2.2345</span><span class=pl-kos>.</span><span class=pl-en>toExponential</span><span class=pl-kos>(</span><span class=pl-c1>20</span><span class=pl-kos>)</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+  </table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/perade/60028f3c18726c96a97e6935da360e5d/raw/c1fecff0cd6fe0f8673e86654ea9e512c54d44fc/example-toExponential.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/perade/60028f3c18726c96a97e6935da360e5d#file-example-toexponential-js">
+          example-toExponential.js
+        </a>
+        hosted with &#10084; by <a href="https://github.com">GitHub</a>
+      </div>
+    </div>
+</div>
+</div>
+<p>toFixed로 반올림을 시도했을 때 1.2345는 실제로는 1.234에 더 가까운 근사치이고, 2.2345는 실제로는 2.235에 더 가까운 근사치이기 때문에 예제와 같은 결과가 나온다는 것을 알 수 있다.</p>
+<hr>
+<h1 id="해결-방법은-무엇인가"><a href="#%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80" aria-hidden="true"><span class="icon icon-link"></span></a>해결 방법은 무엇인가</h1>
+<p>널리 알려진 덧셈 이슈(0.1 + 0.2)의 해결 방법처럼 정수로 반올림 후 다시 원하는만큼 자리수를 조정하는 형태로 해결할 수 있다. 하는 김에 덧셈 이슈도 예제에 한해 해결 가능한 간단한 함수를 만들어 보았다. 아래 코드와 함께 짧은 정리글을 마친다.</p>
+<div class="gist-embed">
+    <div id="gist107182017" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-example-alternative-tofixed-js" class="file my-2">
+    
+    <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript  ">
+
+        
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table data-hpc class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="JavaScript" data-tagsearch-path="example-alternative-toFixed.js">
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L1" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="1"></td>
+          <td id="file-example-alternative-tofixed-js-LC1" class="blob-code blob-code-inner js-file-line"><span class=pl-k>function</span> <span class=pl-en>getRound</span> <span class=pl-kos>(</span><span class=pl-s1>value</span><span class=pl-kos>,</span> <span class=pl-s1>digit</span><span class=pl-kos>)</span> <span class=pl-kos>{</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L2" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="2"></td>
+          <td id="file-example-alternative-tofixed-js-LC2" class="blob-code blob-code-inner js-file-line">  <span class=pl-k>const</span> <span class=pl-s1>digits</span> <span class=pl-c1>=</span> <span class=pl-s1>digit</span> <span class=pl-c1>&gt;</span> <span class=pl-c1>20</span> ? <span class=pl-c1>20</span> : <span class=pl-s1>digit</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L3" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="3"></td>
+          <td id="file-example-alternative-tofixed-js-LC3" class="blob-code blob-code-inner js-file-line">  <span class=pl-k>return</span>  <span class=pl-v>Number</span><span class=pl-kos>(</span><span class=pl-v>Math</span><span class=pl-kos>.</span><span class=pl-en>round</span><span class=pl-kos>(</span><span class=pl-s1>value</span> <span class=pl-c1>+</span> <span class=pl-s>&#39;e&#39;</span> <span class=pl-c1>+</span> <span class=pl-s1>digits</span><span class=pl-kos>)</span> <span class=pl-c1>+</span> <span class=pl-s>&#39;e-&#39;</span> <span class=pl-c1>+</span> <span class=pl-s1>digits</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L4" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="4"></td>
+          <td id="file-example-alternative-tofixed-js-LC4" class="blob-code blob-code-inner js-file-line"><span class=pl-kos>}</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L5" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="5"></td>
+          <td id="file-example-alternative-tofixed-js-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L6" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="6"></td>
+          <td id="file-example-alternative-tofixed-js-LC6" class="blob-code blob-code-inner js-file-line"><span class=pl-k>function</span> <span class=pl-en>getSum</span> <span class=pl-kos>(</span><span class=pl-s1>a</span><span class=pl-kos>,</span> <span class=pl-s1>b</span><span class=pl-kos>,</span> <span class=pl-s1>digit</span><span class=pl-kos>)</span> <span class=pl-kos>{</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L7" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="7"></td>
+          <td id="file-example-alternative-tofixed-js-LC7" class="blob-code blob-code-inner js-file-line">  <span class=pl-k>const</span> <span class=pl-s1>digits</span> <span class=pl-c1>=</span> <span class=pl-c1>1</span> <span class=pl-c1>+</span> <span class=pl-s>&#39;e&#39;</span> <span class=pl-c1>+</span> <span class=pl-s1>digit</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L8" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="8"></td>
+          <td id="file-example-alternative-tofixed-js-LC8" class="blob-code blob-code-inner js-file-line">  <span class=pl-k>return</span> <span class=pl-kos>(</span><span class=pl-kos>(</span><span class=pl-s1>a</span> <span class=pl-c1>*</span> <span class=pl-s1>digits</span><span class=pl-kos>)</span> <span class=pl-c1>+</span> <span class=pl-kos>(</span><span class=pl-s1>b</span> <span class=pl-c1>*</span> <span class=pl-s1>digits</span><span class=pl-kos>)</span><span class=pl-kos>)</span> <span class=pl-c1>/</span> <span class=pl-s1>digits</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L9" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="9"></td>
+          <td id="file-example-alternative-tofixed-js-LC9" class="blob-code blob-code-inner js-file-line"><span class=pl-kos>}</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L10" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="10"></td>
+          <td id="file-example-alternative-tofixed-js-LC10" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L11" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="11"></td>
+          <td id="file-example-alternative-tofixed-js-LC11" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-c1>DIGIT</span> <span class=pl-c1>=</span> <span class=pl-c1>3</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L12" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="12"></td>
+          <td id="file-example-alternative-tofixed-js-LC12" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-s1>numA</span> <span class=pl-c1>=</span> <span class=pl-en>getRound</span><span class=pl-kos>(</span><span class=pl-c1>1.2345</span><span class=pl-kos>,</span> <span class=pl-c1>DIGIT</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L13" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="13"></td>
+          <td id="file-example-alternative-tofixed-js-LC13" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-s1>numB</span> <span class=pl-c1>=</span> <span class=pl-en>getRound</span><span class=pl-kos>(</span><span class=pl-c1>2.2345</span><span class=pl-kos>,</span> <span class=pl-c1>DIGIT</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L14" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="14"></td>
+          <td id="file-example-alternative-tofixed-js-LC14" class="blob-code blob-code-inner js-file-line"><span class=pl-k>const</span> <span class=pl-s1>sum</span> <span class=pl-c1>=</span> <span class=pl-en>getSum</span><span class=pl-kos>(</span><span class=pl-s1>numA</span><span class=pl-kos>,</span> <span class=pl-s1>numB</span><span class=pl-kos>,</span> <span class=pl-c1>DIGIT</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L15" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="15"></td>
+          <td id="file-example-alternative-tofixed-js-LC15" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L16" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="16"></td>
+          <td id="file-example-alternative-tofixed-js-LC16" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// 1.235</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L17" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="17"></td>
+          <td id="file-example-alternative-tofixed-js-LC17" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-s1>numA</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L18" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="18"></td>
+          <td id="file-example-alternative-tofixed-js-LC18" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L19" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="19"></td>
+          <td id="file-example-alternative-tofixed-js-LC19" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// 2.235</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L20" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="20"></td>
+          <td id="file-example-alternative-tofixed-js-LC20" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-s1>numB</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L21" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="21"></td>
+          <td id="file-example-alternative-tofixed-js-LC21" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L22" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="22"></td>
+          <td id="file-example-alternative-tofixed-js-LC22" class="blob-code blob-code-inner js-file-line"><span class=pl-c>// 3.47</span></td>
+        </tr>
+        <tr>
+          <td id="file-example-alternative-tofixed-js-L23" class="blob-num js-line-number js-code-nav-line-number js-blob-rnum" data-line-number="23"></td>
+          <td id="file-example-alternative-tofixed-js-LC23" class="blob-code blob-code-inner js-file-line"><span class=pl-smi>console</span><span class=pl-kos>.</span><span class=pl-en>log</span><span class=pl-kos>(</span><span class=pl-s1>sum</span><span class=pl-kos>)</span><span class=pl-kos>;</span></td>
+        </tr>
+  </table>
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/perade/70fb8f6fa1dd672534290e60ac6ecfa3/raw/a1ac8344842098f8ffdd7e8534ff7f9ce1c50768/example-alternative-toFixed.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/perade/70fb8f6fa1dd672534290e60ac6ecfa3#file-example-alternative-tofixed-js">
+          example-alternative-toFixed.js
+        </a>
+        hosted with &#10084; by <a href="https://github.com">GitHub</a>
+      </div>
+    </div>
+</div>
+</div>
+<hr>
+<h3 id="references"><a href="#references" aria-hidden="true"><span class="icon icon-link"></span></a>References</h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/588004/is-floating-point-math-broken" target="_blank" rel="nofollow noopener noreferrer">https://stackoverflow.com/questions/588004/is-floating-point-math-broken</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed" target="_blank" rel="nofollow noopener noreferrer">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed</a></li>
+</ul>
+</div><div class="post__footer"><div class="post-tags"><a href="/blog/tag/JavaScript/" class="post-tags__link"><span>#</span> JavaScript
+		</a></div></div></div><div class="post-comments"></div><div class="author post-author"><img alt="Author image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3cfilter id='__svg-blur-362d9c1c939202a0ae435179fe4721d8'%3e%3cfeGaussianBlur in='SourceGraphic' stdDeviation='5'/%3e%3c/filter%3e%3c/defs%3e%3cimage x='0' y='0' filter='url(%23__svg-blur-362d9c1c939202a0ae435179fe4721d8)' width='180' height='180' xlink:href='data:image/jpeg%3bbase64%2c/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABAAEADASIAAhEBAxEB/8QAGQABAQEBAQEAAAAAAAAAAAAAAAgHAQMG/8QAKhAAAQMEAQQBAgcAAAAAAAAAAQACAwQFETEGBxIhQQgicRMVMkJRYZH/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARECEv/aAAwDAQACEQMRAD8AqkaCINBEBERARcBB0QfsuoCHSIdIA0EQaCIBUW9UeXXbnPMakQPqn0ENQ%2bnoaSIntHZnJ7Rt5ALifQwPStIrErTwd1l5TbnUEMEE1Jc6uvnEhBc6KZrfMQ/c3DSwDwWqW41zNqdeI8wunErrHcrNWyxuYe%2bSHvJjnYPJa9uiCPex6Ku%2b21QrrfS1bWOY2eJsoa7YDgDg/wCrCOV9NqC83GWGnoIIaCsayaihiYI6mOV8jXTANd5ZGQHE58DPgA73ulYY6aJjgwOawAhn6Rgev6SXTrnzceiHSIdKsg0EQaCICnb5S8tuFFdbHx23yPpopWCtmmj8PdiTtY0O2AC0k4349KiVifXXhlXyTmHFquWMussDJoZnQOxMJHDuYAMHwS1oz91KsfE/Hbmt2d1Iq7JcaiWtgukclR3zHueyVrQ4u7t4IyCNZxj3molgXSvgFXx3q1LWUUcn5ZBbXU9VJUH6vxy/GGDHkfQDn%2bDsrfUhRDpEOlUBoIg0EQEREBERAQ6RDpB//9k=' /%3e%3c/svg%3e" width="180" data-src="/blog/assets/static/Author.e6b6009.39aeb0a44dc2f89f98aa5fff2d37c6fb.jpg" data-srcset="/blog/assets/static/Author.e6b6009.39aeb0a44dc2f89f98aa5fff2d37c6fb.jpg 180w" data-sizes="(max-width: 180px) 100vw, 180px" class="author__image g-image g-image--lazy g-image--loading"><noscript><img src="/blog/assets/static/Author.e6b6009.39aeb0a44dc2f89f98aa5fff2d37c6fb.jpg" class="author__image g-image g-image--loaded" width="180" alt="Author image"></noscript><!----><p class="author__intro">
+		Slowly, but steadily
+	</p><p class="author__links"></p></div></main><footer class="footer"><span class="footer__copyright">Copyright © 2023. </span><span class="footer__links">Powered by <a href="//gridsome.org"> Gridsome </a></span></footer></div>
+    <script src="/blog/assets/js/app.11cf6a80.js" defer></script><script src="/blog/assets/js/page--src-templates-post-vue.1ab9b8d0.js" defer></script>
+  </body>
+</html>
